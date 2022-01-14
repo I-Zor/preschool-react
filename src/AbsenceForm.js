@@ -31,7 +31,7 @@ function AbsenceForm() {
                 </form>
             </div>
             <label>
-                <input type="checkbox" id="checkbox-today" />
+                <input type="checkbox" id="checkbox-offtime" />
                 Ledig
             </label>
             <button id="save-buton">Spara</button>
