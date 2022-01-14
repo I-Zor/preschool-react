@@ -23,10 +23,89 @@
 }
  */
 
+ #absence-form {
+   display: flex;
+   flex-direction: column;
+   border-style: solid;
+   padding: 30px;
+   width: 660px;
+ }
+
+ #save-buton {
+   height: 30px;
+   width: 80px;
+   margin-left: 505px;
+ }
+
+ #date-today-form {
+   display: flex;
+   flex-direction: column;
+ }
+ .groupName {
+   display: flex;
+  font-size: 25px;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  border-color:turquoise;
+  border-style: solid;
+  background-color: turquoise;
+ }
+
+ #name {
+  display: flex;
+  font-size: 25px;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+ }
+
+ .sidebar {
+   display: flex;
+   flex-direction: column;
+   margin-top: 60px;
+   margin-bottom: 50px;
+   border-style: solid;
+   border-color: steelblue;
+   height: 800px;
+   width: 224px;
+ }
+
+ #allChildrenButton {
+   padding-top: 30px;
+   padding-bottom: 30px;
+   font-size: 25px;
+ }
+
+ #welcome-screen {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 200px;
+ }
+
+ #greeting-educator {
+   margin-bottom: 40px;
+ }
+
 #welcome {
    display: flex;
    justify-content: space-around;
    padding-top: 200px;
+}
+
+#children-counter {
+  margin-bottom: 100px;
+}
+
+#absent-children-button {
+  padding-left: 40px;
+ padding-right: 40px;
+ padding-top: 10px;
+ padding-bottom: 10px;
+ font-size: 20px;
 }
 
 #logInForm {
@@ -58,5 +137,179 @@
  padding-top: 10px;
  padding-bottom: 10px;
  text-align: center;
+}
 
+#logOutButton {
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-right: 50px;
+  font-size: 20px;
+ }
+
+ #startSiteButton {
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-right: 0;
+  margin-left: 1450px;
+  font-size: 20px;
+ }
+
+ #child-list {
+  margin-top: 80px;
+  margin-left: 300px;
+ }
+
+ #child-button {
+  font-size: 18px;
+  width: 330px;
+  height: 40px;
+ }
+
+ #register-absence-button {
+  font-size: 18px;
+  width: 330px;
+  height: 40px;
+ }
+
+ #child-info {
+  margin-top: 80px;
+  margin-left: 300px;
+ }
+
+ #caregivers {
+   display: flex;
+   margin-bottom: 20px;
+   margin-top: 40px;
+ }
+
+ #caregiver-1 {
+   margin-right: 200px;
+ }
+
+ #caring-times {
+   display: flex;
+ }
+
+ #caring-times-info {
+   display: flex;
+   margin-top: 20px;
+ }
+
+ #caring-times-info-caregiver {
+   display: flex;
+   margin-left: 300px;
+   margin-top: 30px;
+   height: 250px;
+ }
+
+ #caring-times-caregiver {
+   display: flex;
+   flex-direction: column;
+   justify-content: space-evenly;
+   margin-right: 40px;
+ }
+
+ #week-times-caregiver {
+   display: flex;
+   flex-direction: column;
+   justify-content: space-evenly;
+ }
+
+ #child-group-button {
+  font-size: 18px;
+  width: 300px;
+  height: 80px;
+  margin-right: 30px;
+ }
+
+ #child-group {
+   display: flex;
+   margin-top: 50px;
+ }
+
+ #week-days {
+   margin-right: 20px;
+ }
+
+ #welcome-caregiver {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 200px;
+ }
+
+ #caregiver-child-info {
+   display: flex;
+ }
+
+ #caring-time-title-caregiver {
+   margin-left: 300px;
+   margin-top: 60px;
+ }
+
+ #change-buttons {
+   display: flex;
+   flex-direction: column;
+   justify-content: space-evenly;
+   margin-left: 40px;
+ }
+
+ .change-button {
+   width: 100px;
+   height: 30px;
+
+ }
+ #checkbox-today {
+   margin-right: 10px;
+   margin-bottom: 15px;
+ }
+
+ #date-picker {
+   margin-top: 15px;
+   margin-bottom: 15px;
+ }
+
+ #reason {
+   width: 500px;
+   margin-left: 10px;
+   margin-bottom: 15px;
+ }
+
+ #educators-info {
+  margin-top: 200px;
+  margin-left: 300px;
+  display: flex;
+ }
+
+ #educator-1 {
+   margin-right: 160px;
+ }
+
+ #educator-2 {
+  margin-right: 160px;
+ }
+
+#date {
+  font-size: 25px;
+}
+
+#header {
+  border:mediumturquoise;
+  border-style: solid;
+  background-color: mediumturquoise;
+  padding-bottom: 10px;
+  padding-left: 40px;
+  padding-top: 10px;
+  display: flex;
+  justify-content:space-between;
+}
+
+#footer {
+  margin-top: 20px;
+  padding: 30px;
+  background-color: mediumturquoise;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
 }
