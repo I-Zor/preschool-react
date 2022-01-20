@@ -4,7 +4,24 @@ import TimePicker from 'react-time-picker';
 
 const CaringTimeForm = (props) => {
 
-    const [selectedTime, onChange] = useState(new Date());
+    const [startValue, setStartValue] = useState('');
+    const [endValue, setEndValue] = useState('');
+
+    var chosenStartTime = startValue;
+    var splittedStartTime = chosenStartTime.split(':');
+    var startHour = splittedStartTime[0];
+    var startMinute = splittedStartTime[1];
+    console.log(startHour);
+    console.log(startMinute);
+
+    var chosenEndTime = endValue;
+    var splittedEndTime = chosenEndTime.split(':');
+    var endHour= splittedEndTime[0];
+    var endMinute = splittedEndTime[1];
+    console.log(endHour);
+    console.log(endMinute);
+
+
 
     if (!props.show) {
         return null
@@ -36,14 +53,16 @@ const CaringTimeForm = (props) => {
                         <div id="time-picker-start">
                             <h4>Starttid</h4><br></br>
                             <TimePicker
-                                value={selectedTime}
-                                onChange={onChange} />
+                                value={startValue}
+                                onChange={setStartValue}
+                                locale="sv" />
                         </div>
                         <div id="time-picker-end">
                             <h4>Sluttid</h4><br></br>
                             <TimePicker
-                                value={selectedTime}
-                                onChange={onChange} />
+                                value={endValue}
+                                onChange={setEndValue}
+                                locale="sv"/>
                         </div>
                     </div>
                 </div>

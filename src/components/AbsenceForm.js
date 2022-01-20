@@ -13,6 +13,10 @@ const AbsenceForm = (props) => {
         return null
     };
 
+    var chosenDate = startDate;
+    var convertedDate = chosenDate.toLocaleDateString();
+    console.log(convertedDate);
+
     return (
          <div className="modal">
             <div id="absence-form">

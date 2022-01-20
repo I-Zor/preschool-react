@@ -6,7 +6,6 @@ import EducatorAbsence from "./components/Educator-absence";
 import EducatorChildInfo from "./components/Educator-childInfo";
 import CaregiverHomepage from "./components/Caregiver-homepage";
 import CaregiverChildPage from "./components/Caregiver-childPage";
-
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 
 
