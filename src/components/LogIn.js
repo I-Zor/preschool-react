@@ -1,33 +1,44 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import '../App.css';
 import axios from 'axios';
 import swal from 'sweetalert2';
 
-const Login = () => {
-
-  const [userName, setUserName] = useState('');
-  const [password, setPassword] = useState('');
-  const [educators, setEducators] = useState([]);
+const Login = ({ userName, setUserName, password, setPassword, educators, setEducators, educator, setEducator, caregiver, setCaregiver}) => {
 
   const navigateToEducator = useNavigate();
   const navigateToCaregiver = useNavigate();
   let ids = [];
 
   const logInUrl = 'http://localhost:8080/login/' + userName + '/' + password;
-  const educatorsUrl = 'http://localhost:8080/educator'
+  const educatorsUrl = 'http://localhost:8080/educator';
+  const getCaregiverUrl = 'http://localhost:8080/caregiver/';
+  const getEducatorUrl = 'http://localhost:8080/educator/';
+
 
   const updateUserName = e => {
+    e.preventDefault();
     setUserName(e.target.value);
   }
 
   const updatePassword = e => {
+    e.preventDefault();
     setPassword(e.target.value);
   }
 
   useEffect(() => {
+    const getAllEducators = () => {
+      axios.get(educatorsUrl)
+        .then((response) => {
+          let educators = response.data;
+          setEducators(educators);
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+    }
     getAllEducators();
-  }, []);
+  }, [setEducators]);
 
   const findEducatorsId = () => {
     educators.forEach(element => {
@@ -35,18 +46,43 @@ const Login = () => {
     });
   }
 
-
-  const handleLogin = () => {
+  const handleLogin = (e) => {
+    e.preventDefault();
     axios.get(logInUrl)
       .then((response) => {
-        let userId = response.data;
+        let id = response.data;
         findEducatorsId();
-        let foundEducator = ids.find(id => id === userId);
+        let foundEducator = ids.find(element => element === id);
         if (foundEducator) {
-          navigateToEducator('/educator', { replace: true })
+          axios.get(getEducatorUrl + id)
+            .then((response) => {
+              let user = response.data;
+              console.log(user);
+              setEducator({
+                id: user.id,
+                personalInformation: user.personalInformation,
+                contactInformation: user.contactInformation,
+                security: user.security,
+                preschoolGroup: user.preschoolGroup,
+                isAdmin: user.isAdmin
+              });
+              
+            })
+            .catch((error) => {
+              console.log(error);
+            })
+          navigateToEducator('/educator')
         }
         else {
-          navigateToCaregiver('/caregiver', { replace: true })
+          axios.get(getCaregiverUrl + id)
+            .then((response) => {
+              setCaregiver(response.data);
+              console.log(response.data);
+            })
+            .catch((error) => {
+              console.log(error);
+            })
+          //navigateToCaregiver('/caregiver')
         }
         ids = [];
       })
@@ -61,17 +97,29 @@ const Login = () => {
       });
   };
 
-  const getAllEducators = () => {
-    axios.get(educatorsUrl)
+  console.log(educator);
+
+
+/*   const getEducator = () => {
+    axios.get(getEducatorUrl + userId)
       .then((response) => {
-        let educators = response.data;
-        setEducators(educators);
+        console.log(response.data);
       })
       .catch((error) => {
         console.log(error);
       })
   }
 
+  const getCaregiver = () => {
+    axios.get(getCaregiverUrl + userId)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }
+ */
   return (
     <div>
       <h1 id="welcome">Välkommen till Förskolan!</h1>
