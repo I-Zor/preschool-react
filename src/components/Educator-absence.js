@@ -1,23 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import '../App.css';
 
-const EducatorAbsence = ({ educator, absentChildren, setAbsentChildren, absences, setUserName, setPassword }) => {
-    
-    const [groupName, setGroupName] = useState(educator.preschoolGroup.name);
-    const [dateToday, setDateToday] = useState("");
+const EducatorAbsence = ({ dateToday, absentChildren, absences, setUserName, setPassword, groupName }) => {
 
     const logOut = useNavigate();
     const navigateToStartPage = useNavigate();
+    const navigateToAllChildren = useNavigate();
+    const navigateToChildPage = useNavigate();
 
-
-    useEffect(() => {
-        const getDate = () => {
-            let today = new Date().toLocaleDateString();
-            setDateToday(today);
-        };
-        getDate();
-    }, []);
 
     const handleLogOut = () => {
         setUserName('');
@@ -27,22 +18,28 @@ const EducatorAbsence = ({ educator, absentChildren, setAbsentChildren, absences
 
     const goToStartPage = () => {
         navigateToStartPage('/educator');
+    };
+
+    const goToAllChildren = () => {
+        navigateToAllChildren('/educator/children');
+    }
+
+    const renderChildren = absentChildren.map((child) =>
+        <button onClick={showChildInfo} className="absent-children" id={child.id} key={child.id}>{child.personalInformation.firstName} {child.personalInformation.lastName}</button>);
+
+    const renderReason = absences.map((absence) =>
+        <label className="reason" key={absence.id}> {absence.reasonToAbsence}</label>);
+
+    function showChildInfo(e) {
+        window.sessionStorage.setItem("childId", e.target.id);
+        navigateToChildPage('/educator/child');
     }
 
 
-
-    const renderChildren = absentChildren.map((child) =>
-        <button className="absent-children" id={child.id} key={child.id}>{child.personalInformation.firstName} {child.personalInformation.lastName}</button>);
-    
-     const renderReason = absences.map((absence) =>
-         <label className="reason" key={absence.id}> {absence.reasonToAbsence}</label>);
-    
-    
- 
     return (
         <div>
             <div className="header">
-                <label id="date">{ dateToday}</label>
+                <label id="date">{dateToday}</label>
                 <div>
                     <button onClick={goToStartPage} id="startSiteButton">Startsidan</button>
                     <button onClick={handleLogOut} className="logOutButton">Logga ut</button>
@@ -51,7 +48,7 @@ const EducatorAbsence = ({ educator, absentChildren, setAbsentChildren, absences
             <div id="educator-absence">
                 <div className="sidebar">
                     <label className="groupName">{groupName}</label>
-                    <button id="allChildrenButton">Alla barn</button>
+                    <button onClick={goToAllChildren} id="allChildrenButton">Alla barn</button>
                 </div>
                 <div id="absent-children">
                     {renderChildren}

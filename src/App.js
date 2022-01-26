@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Login from "./components/LogIn";
 import EducatorHomepage from "./components/Educator-homepage";
 import EducatorChildren from "./components/Educator-children";
@@ -13,12 +13,23 @@ function App() {
 
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
-  const [educators, setEducators] = useState([]);
-  const [educator, setEducator] = useState('');
-  const [caregiver, setCaregiver] = useState('');
+  const [educator, setEducator] = useState({});
   const [absences, setAbsences] = useState([]);
   const [presentChildren, setPresentChildren] = useState([]);
   const [absentChildren, setAbsentChildren] = useState([]);
+  const [allChildren, setAllChildren] = useState([]);
+  const [userId, setUserId] = useState('');
+  const [dateToday, setDateToday] = useState('');
+  const [groupName, setGroupName] = useState('');
+  const [childId, setChildId] = useState('');
+
+  useEffect(() => {
+    function getDate() {
+      let today = new Date().toLocaleDateString();
+      setDateToday(today);
+    };
+    getDate();
+  }, []);
 
   return (
     <BrowserRouter>
@@ -29,32 +40,41 @@ function App() {
             setUserName={setUserName}
             password={password}
             setPassword={setPassword}
-            educators={educators}
-            setEducators={setEducators}
-            educator={educator}
-            setEducator={setEducator}
-            caregiver={caregiver}
-            setCaregiver={setCaregiver} />} />
+            userId={userId}
+            setUserId={setUserId}
+          />} />
           <Route path='/educator' element={<EducatorHomepage
+            userId={userId}
+            dateToday={dateToday}
             educator={educator}
             setEducator={setEducator}
             presentChildren={presentChildren}
-            setPresentChildren={setPresentChildren}
             absentChildren={absentChildren}
+            setAllChildren={setAllChildren}
             setAbsentChildren={setAbsentChildren}
             setAbsences={setAbsences}
             setUserName={setUserName}
-            setPassword={setPassword} />} />
-          <Route path='/educator/children/' element={<EducatorChildren />} />
-          <Route path='/educator/absence' element={<EducatorAbsence
-            absentChildren={absentChildren}
-            setAbsentChildren={setAbsentChildren}
-            absences={absences}
-            educator={educator}
+            setPassword={setPassword}
+            groupName={groupName}
+            setGroupName={setGroupName} />} />
+          <Route path='/educator/children' element={<EducatorChildren
+            allChildren={allChildren}
             setUserName={setUserName}
             setPassword={setPassword}
-          />} />
-          <Route path='/educator/child' element={<EducatorChildInfo />} />
+            groupName={groupName}
+            dateToday={dateToday} />} />
+          <Route path='/educator/absence' element={<EducatorAbsence
+            absentChildren={absentChildren}
+            absences={absences}
+            setUserName={setUserName}
+            setPassword={setPassword}
+            dateToday={dateToday}
+            groupName={groupName} />} />
+          <Route path='/educator/child' element={<EducatorChildInfo
+            dateToday={dateToday}
+            groupName={groupName}
+            setUserName={setUserName}
+            setPassword={setPassword} />} />
           <Route path='/caregiver' element={<CaregiverHomepage />} />
           <Route path='/caregiver/child' element={<CaregiverChildPage />} />
         </Routes>
