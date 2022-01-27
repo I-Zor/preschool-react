@@ -21,7 +21,7 @@ function App() {
   const [userId, setUserId] = useState('');
   const [dateToday, setDateToday] = useState('');
   const [groupName, setGroupName] = useState('');
-  const [childId, setChildId] = useState('');
+  const [child, setChild] = useState('');
 
   useEffect(() => {
     function getDate() {
@@ -75,8 +75,16 @@ function App() {
             groupName={groupName}
             setUserName={setUserName}
             setPassword={setPassword} />} />
-          <Route path='/caregiver' element={<CaregiverHomepage />} />
-          <Route path='/caregiver/child' element={<CaregiverChildPage />} />
+          <Route path='/caregiver' element={<CaregiverHomepage
+            userId={userId}
+            dateToday={dateToday}
+            setUserName={setUserName}
+            setPassword={setPassword}
+             />} />
+          <Route path='/caregiver/child' element={<CaregiverChildPage
+            dateToday={dateToday}
+            setUserName={setUserName}
+            setPassword={setPassword} />} />
         </Routes>
       </div>
     </BrowserRouter>

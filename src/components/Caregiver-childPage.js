@@ -1,66 +1,116 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CaringTimeForm from "./CaringTimeForm";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import '../App.css';
 
-const CaregiverChildPage = () => {
+const CaregiverChildPage = ({ dateToday, setUserName, setPassword}) => {
 
     const [show, setShow] = useState(false);
+    const [childName, setChildName] = useState('');
+    const [groupName, setGroupName] = useState('');
+    const [groupId, setGroupId] = useState('');
+    const [caringTimes, setCaringTimes] = useState([]);
+    const [educators, setEducators] = useState([]);
+
+    const logOut = useNavigate();
+    const navigateToStartPage = useNavigate();
+
+
+    const handleLogOut = () => {
+        setUserName('');
+        setPassword('');
+        logOut('/');
+    };
+
+    const goToStartPage = () => {
+        navigateToStartPage('/caregiver');
+    };
+
+    const renderCaringTimeWeekday = caringTimes.map((weekday) =>
+        <h4 className="c-info" key={weekday.id} id={weekday.id}>{weekday.weekday}</h4>);
+
+    const renderCaringTimeHours = caringTimes.map((time) =>
+        <h4 className="c-info" key={time.id} id={time.id}>{time.startHour}:{time.startMinut} - {time.endHour}:{time.endMinut}</h4>);
+
+    const renderChangeButtons = caringTimes.map((time) =>
+        <button onClick={() =>setShow(true)} className="register-change-button" id={time.id} key={time.id}>Ändra</button>);
+
+    const renderEducatorsName = educators.map((educator) =>
+        <h4 className="c-name" key={educator.id}>{educator.personalInformation.firstName} {educator.personalInformation.lastName} </h4>);
+
+    const renderEducatorsInfo = educators.map((educator) =>
+        <h4 className="c-info" key={educator.id}>{educator.contactInformation.phoneNumber} <br /> {educator.contactInformation.email}</h4>);
+
+
+    useEffect(() => {
+        function getChild() {
+            let childId = window.sessionStorage.getItem("childId");
+            let getChildUrl = 'http://localhost:8080/caregiver/child/' + childId;
+            axios.get(getChildUrl)
+                .then((response) => {
+                    let child = response.data;
+                    console.log(child);
+                    setChildName(child.personalInformation.firstName);
+                    setGroupName(child.preschoolGroup.name);
+                    setGroupId(child.preschoolGroup.id)
+                    setCaringTimes(child.caringTimes);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        };
+
+        function getEducatorsInGroup() {
+            let getEducatorsinGroupUrl = 'http://localhost:8080/caregiver/educator/' + groupId;
+            axios.get(getEducatorsinGroupUrl)
+                .then((response) => {
+                    let educators = response.data;
+                    console.log(educators);
+                    setEducators(educators);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        };
+        getChild();
+        getEducatorsInGroup();
+    }, [groupId]);
 
     return (
         <div>
             <div className="header">
-                <label id="date">Datum</label>
-                <button id="startSiteButton">Startsidan</button>
-                <button id="logOutButton">Logga ut</button>
+                <label id="date">{dateToday}</label>
+                <div>
+                <button onClick={goToStartPage} id="startSiteButton">Startsidan</button>
+                <button onClick={handleLogOut} className="logOutButton">Logga ut</button>
+                </div>
             </div>
             <div id="caregiver-child-info">
                 <div className="sidebar">
-                    <label htmlFor="" className="groupName">Barnens namn</label>
-                    <label htmlFor="" id="name">Grupp</label>
+                    <label htmlFor="" className="groupName">{childName}</label>
+                    <label htmlFor="" id="name">{groupName}</label>
                 </div>
-                <div>
-                    <div id="educators-info">
+                <div className="info">
+                    <div className="caregivers">
                         <div id="educator-1">
-                            <h3 id="educator-1-name">Pedagog 1</h3>
-                            <h3 id="educator-1-email">Email</h3>
-                            <h3 id="educator-1-telefon">Telefon</h3>
+                            {renderEducatorsName}
                         </div>
                         <div id="educator-2">
-                            <h3 id="educator-2-name">Pedagog 2</h3>
-                            <h3 id="educator-2-email">Email</h3>
-                            <h3 id="educator-2-telefon">Telefon</h3>
-                        </div>
-                        <div id="educator-3">
-                            <h3 id="educator-3-name">Pedagog 3</h3>
-                            <h3 id="educator-3-email">Email</h3>
-                            <h3 id="educator-3-telefon">Telefon</h3>
+                            {renderEducatorsInfo}
                         </div>
                     </div>
-
                     <h3 id="caring-time-title-caregiver">Omsörgstider</h3>
-
                     <div id="caring-times-info-caregiver">
                         <div id="caring-times-caregiver">
-                            <h4>Måndag</h4>
-                            <h4>Tisdag</h4>
-                            <h4>Onsdag</h4>
-                            <h4>Torsdag</h4>
-                            <h4>Fredag</h4>
+                            {renderCaringTimeWeekday}
                         </div>
                         <div id="week-times-caregiver">
-                            <h4 id="monday-time-caregiver">08:00 - 16:00</h4>
-                            <h4 id="tuesday-time-caregiver">08:00 - 16:00</h4>
-                            <h4 id="wednesday-time-caregiver">08:00 - 16:00</h4>
-                            <h4 id="thursday-time-caregiver">08:00 - 16:00</h4>
-                            <h4 id="friday-time-caregiver">08:00 - 16:00</h4>
+                            {renderCaringTimeHours}
                         </div>
                         <div id="change-buttons">
-                            <button onClick={() => setShow(true)} id="change-button-monday" className="change-button">Ändra</button>
-                            <button onClick={() => setShow(true)} id="change-button-tuesday" className="change-button">Ändra</button>
-                            <button onClick={() => setShow(true)} id="change-button-wednesday" className="change-button">Ändra</button>
-                            <button onClick={() => setShow(true)} id="change-button-thursday" className="change-button">Ändra</button>
-                            <button onClick={() => setShow(true)} id="change-button-friday" className="change-button">Ändra</button>
-                            <CaringTimeForm show={show} close={() => setShow(false)}/>
+                            {renderChangeButtons}
+                            <CaringTimeForm show={show} close={() => setShow(false)} />
                         </div>
                     </div>
                 </div>
