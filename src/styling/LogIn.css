@@ -1,0 +1,36 @@
+#welcome {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 200px;
+}
+
+#login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#username {
+    display: flex;
+    flex-direction: column;
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+#password {
+    display: flex;
+    flex-direction: column;
+}
+
+#logIn-button {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    margin-top: 50px;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+}

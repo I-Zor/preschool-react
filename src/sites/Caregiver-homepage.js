@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import Axios from "axios";
 import { useNavigate } from "react-router-dom";
-import '../App.css';
-import AbsenceForm from "./AbsenceForm";
+import '../styling/App.css';
+import '../styling/Caregiver-homepage.css';
+import AbsenceForm from '../components/AbsenceForm';
 
 const CaregiverHomepage = ({ userId, dateToday, setUserName, setPassword }) => {
 
@@ -14,7 +15,6 @@ const CaregiverHomepage = ({ userId, dateToday, setUserName, setPassword }) => {
     const navigateToChildPage = useNavigate();
     const logOut = useNavigate();
 
-
     const handleLogOut = () => {
         setUserName('');
         setPassword('');
@@ -24,7 +24,7 @@ const CaregiverHomepage = ({ userId, dateToday, setUserName, setPassword }) => {
     useEffect(() => {
         function getCaregiver() {
             let getCaregiverUrl = 'http://localhost:8080/caregiver/' + caregiverId;
-            axios.get(getCaregiverUrl)
+            Axios.get(getCaregiverUrl)
                 .then((response) => {
                     let caregiver = response.data;
                     setCaregiversName(caregiver.personalInformation.firstName);
@@ -36,7 +36,7 @@ const CaregiverHomepage = ({ userId, dateToday, setUserName, setPassword }) => {
 
         function getChildren() {
             let getChildrenByCaregiverUrl = 'http://localhost:8080/child/' + caregiverId;
-            axios.get(getChildrenByCaregiverUrl)
+            Axios.get(getChildrenByCaregiverUrl)
                 .then((response) => {
                     let children = response.data;
                     setChildren(children);
@@ -60,7 +60,7 @@ const CaregiverHomepage = ({ userId, dateToday, setUserName, setPassword }) => {
     };
 
     const renderChildren = children.map((child) =>
-        <button onClick={showChildInfo} className="child-group-button" id={child.id} key={child.id}>{child.personalInformation.firstName} {child.personalInformation.lastName}
+        <button onClick={showChildInfo} className="render-children" id={child.id} key={child.id}>{child.personalInformation.firstName} {child.personalInformation.lastName}
             <br /> { child.preschoolGroup.name}</button>);
 
     const renderRegisterAbsenceButtons = children.map((child) =>
@@ -69,8 +69,8 @@ const CaregiverHomepage = ({ userId, dateToday, setUserName, setPassword }) => {
     return (
         <div>
             <div className="header">
-                <label id="date">{dateToday}</label>
-                <button onClick={handleLogOut} className="logOutButton">Logga ut</button>
+                <label className="date">{dateToday}</label>
+                <button onClick={handleLogOut} className="log-out-button">Logga ut</button>
             </div>
             <div id="welcome-caregiver">
                 <h1>Välkommen {caregiversName}</h1>

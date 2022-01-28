@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import '../styling/App.css';
+import '../styling/Educator-homepage.css';
 
-import '../App.css';
-
-const EducatorHomepage = ({userId, dateToday, groupName, setGroupName, educator, setEducator, presentChildren, setAllChildren, setAbsences, absentChildren, setAbsentChildren, setUserName, setPassword }) => {
+const EducatorHomepage = ({userId, dateToday, groupName, setGroupName, setAllChildren, setAbsences, setAbsentChildren, setUserName, setPassword }) => {
 
     const [educatorId, setEducatorId] = useState(userId);
     const [groupId, setGroupId] = useState('');
@@ -15,14 +15,12 @@ const EducatorHomepage = ({userId, dateToday, groupName, setGroupName, educator,
     const navigateToAbsentChildren = useNavigate();
     const navigateToAllChildren = useNavigate();
 
-
     useEffect(() => {
         function getEducator() {
             const getEducatorUrl = 'http://localhost:8080/educator/' + educatorId;
             axios.get(getEducatorUrl)
                 .then((response) => {
                     let user = response.data;
-                    setEducator(user);
                     setGroupId(user.preschoolGroup.id);
                     setGroupName(user.preschoolGroup.name);
                     setEducatorsName(user.personalInformation.firstName);
@@ -76,7 +74,7 @@ const EducatorHomepage = ({userId, dateToday, groupName, setGroupName, educator,
         getPresence();
         getAbsence();
         getAllChildren();
-    }, [groupId, setEducator, educatorId, setAbsentChildren, setAbsences, setGroupName, setAllChildren]);
+    }, [groupId, educatorId, setAbsentChildren, setAbsences, setGroupName, setAllChildren]);
 
     const handleLogOut = () => {
         setUserName('');
@@ -95,13 +93,13 @@ const EducatorHomepage = ({userId, dateToday, groupName, setGroupName, educator,
     return (
         <div >
             <div className="header">
-                <label id="date">{dateToday}</label>
-                <button onClick={handleLogOut} className="logOutButton">Logga ut</button>
+                <label className="date">{dateToday}</label>
+                <button onClick={handleLogOut} className="log-out-button">Logga ut</button>
             </div>
             <div id="educator-homepage">
                 <div className="sidebar">
-                    <label className="groupName">{groupName}</label>
-                    <button onClick={goToAllChildren} id="allChildrenButton">Alla barn</button>
+                    <label className="child-name">{groupName}</label>
+                    <button onClick={goToAllChildren} className="all-children-button">Alla barn</button>
                 </div>
                 <div id="welcome-screen">
                     <h1 id="greeting-educator">Välkommen {educatorsName}!</h1>

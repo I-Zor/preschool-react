@@ -1,0 +1,57 @@
+#educator-1 {
+  margin-right: 160px;
+}
+
+#educator-2 {
+  margin-right: 160px;
+}
+
+#caring-time-title-caregiver {
+  margin-top: 60px;
+}
+
+#caring-times-info-caregiver {
+  display: flex;
+  margin-top: 30px;
+  height: 200px;
+  width: 300px;
+}
+
+#caring-times-caregiver {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+#week-times-caregiver {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+#change-buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+#name {
+  display: flex;
+  font-size: 25px;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+#caregiver-info {
+  margin-top: 80px;
+  margin-left: 250px;
+  margin-right: 250px;
+}
+
+.register-change-button {
+  font-size: 18px;
+  width: 100px;
+  height: 30px;
+}

@@ -1,0 +1,32 @@
+#absence-form {
+    border-style: solid;
+    border-color: rgb(94, 190, 223);
+    padding: 30px;
+    width: 660px;
+    background: lightblue;
+  }
+
+  #date-today-form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #checkbox-today {
+    margin-right: 10px;
+    margin-bottom: 15px;
+  }
+
+  #date-picker {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+
+  .reason {
+    margin-left: 30px;
+    font-size: 20px;
+  }
+
+  #checkbox-offtime {
+    margin-right: 10px;
+  }
+  

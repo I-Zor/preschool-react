@@ -1,0 +1,121 @@
+.font {
+font-family: 'Lato', sans-serif;
+}
+.child-name {
+  display: flex;
+  font-size: 25px;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  border-color: turquoise;
+  border-style: solid;
+  background-color: turquoise;
+}
+
+.container {
+  display: flex;
+}
+
+.save-button {
+  height: 30px;
+  width: 80px;
+}
+
+.buttons-modal {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+.caregivers {
+  margin-right: 200px;
+  display: flex;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  flex-direction: column;
+}
+
+.rendered-name {
+  display: flex;
+  width: 400px;
+}
+
+.rendered-info {
+  display: flex;
+  width: 400px;
+}
+
+.footer {
+  margin-top: 20px;
+  padding: 30px;
+  background-color: mediumturquoise;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+.header {
+  border: mediumturquoise;
+  border-style: solid;
+  background-color: mediumturquoise;
+  padding-bottom: 10px;
+  padding-left: 40px;
+  padding-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.date {
+  font-size: 25px;
+}
+
+.start-site-button {
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-right: 20px;
+  font-size: 20px;
+}
+
+.log-out-button {
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-right: 50px;
+  font-size: 20px;
+}
+
+.register-absence-button {
+  font-size: 18px;
+  width: 330px;
+  height: 40px;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 50px;
+  border-style: solid;
+  border-color: steelblue;
+  height: 800px;
+  width: 224px;
+}
+
+.all-children-button {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  font-size: 25px;
+}
+
+.render-children {
+  font-size: 18px;
+  width: 300px;
+  height: 80px;
+  margin-right: 30px;
+}
+
+.absent-children {
+  width: 300px;
+  height: 50px;
+  font-size: 20px;
+}

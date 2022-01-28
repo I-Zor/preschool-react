@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import CaringTimeForm from "./CaringTimeForm";
-import axios from "axios";
+import CaringTimeForm from "../components/CaringTimeForm";
+import Axios from "axios";
 import { useNavigate } from "react-router-dom";
-import '../App.css';
+import '../styling/App.css';
+import '../styling/Caregiver-childPage.css'
 
-const CaregiverChildPage = ({ dateToday, setUserName, setPassword}) => {
+const CaregiverChildPage = ({ dateToday, setUserName, setPassword }) => {
 
     const [show, setShow] = useState(false);
     const [childName, setChildName] = useState('');
@@ -28,26 +29,26 @@ const CaregiverChildPage = ({ dateToday, setUserName, setPassword}) => {
     };
 
     const renderCaringTimeWeekday = caringTimes.map((weekday) =>
-        <h4 className="c-info" key={weekday.id} id={weekday.id}>{weekday.weekday}</h4>);
+        <h4 className="rendered-info" key={weekday.id} id={weekday.id}>{weekday.weekday}</h4>);
 
     const renderCaringTimeHours = caringTimes.map((time) =>
-        <h4 className="c-info" key={time.id} id={time.id}>{time.startHour}:{time.startMinut} - {time.endHour}:{time.endMinut}</h4>);
+        <h4 className="rendered-info" key={time.id} id={time.id}>{time.startHour}:{time.startMinut} - {time.endHour}:{time.endMinut}</h4>);
 
     const renderChangeButtons = caringTimes.map((time) =>
-        <button onClick={() =>setShow(true)} className="register-change-button" id={time.id} key={time.id}>Ändra</button>);
+        <button onClick={() => setShow(true)} className="register-change-button" id={time.id} key={time.id}>Ändra</button>);
 
     const renderEducatorsName = educators.map((educator) =>
-        <h4 className="c-name" key={educator.id}>{educator.personalInformation.firstName} {educator.personalInformation.lastName} </h4>);
+        <h4 className="rendered-name" key={educator.id}>{educator.personalInformation.firstName} {educator.personalInformation.lastName} </h4>);
 
     const renderEducatorsInfo = educators.map((educator) =>
-        <h4 className="c-info" key={educator.id}>{educator.contactInformation.phoneNumber} <br /> {educator.contactInformation.email}</h4>);
+        <h4 className="rendered-info" key={educator.id}>{educator.contactInformation.phoneNumber} <br /> {educator.contactInformation.email}</h4>);
 
 
     useEffect(() => {
         function getChild() {
             let childId = window.sessionStorage.getItem("childId");
             let getChildUrl = 'http://localhost:8080/caregiver/child/' + childId;
-            axios.get(getChildUrl)
+            Axios.get(getChildUrl)
                 .then((response) => {
                     let child = response.data;
                     console.log(child);
@@ -63,7 +64,7 @@ const CaregiverChildPage = ({ dateToday, setUserName, setPassword}) => {
 
         function getEducatorsInGroup() {
             let getEducatorsinGroupUrl = 'http://localhost:8080/caregiver/educator/' + groupId;
-            axios.get(getEducatorsinGroupUrl)
+            Axios.get(getEducatorsinGroupUrl)
                 .then((response) => {
                     let educators = response.data;
                     console.log(educators);
@@ -80,18 +81,18 @@ const CaregiverChildPage = ({ dateToday, setUserName, setPassword}) => {
     return (
         <div>
             <div className="header">
-                <label id="date">{dateToday}</label>
+                <label className="date">{dateToday}</label>
                 <div>
-                <button onClick={goToStartPage} id="startSiteButton">Startsidan</button>
-                <button onClick={handleLogOut} className="logOutButton">Logga ut</button>
+                    <button onClick={goToStartPage} id="startSiteButton">Startsidan</button>
+                    <button onClick={handleLogOut} className="logOutButton">Logga ut</button>
                 </div>
             </div>
-            <div id="caregiver-child-info">
+            <div className="container">
                 <div className="sidebar">
-                    <label htmlFor="" className="groupName">{childName}</label>
-                    <label htmlFor="" id="name">{groupName}</label>
+                    <label className="child-name">{childName}</label>
+                    <label id="name">{groupName}</label>
                 </div>
-                <div className="info">
+                <div id="caregiver-info">
                     <div className="caregivers">
                         <div id="educator-1">
                             {renderEducatorsName}

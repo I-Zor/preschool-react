@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import '../App.css';
 import axios from 'axios';
 import swal from 'sweetalert2';
+import '../App.css';
+import '../styling/LogIn.css';
 
-const Login = ({ userName, setUserName, password, setPassword, userId, setUserId }) => {
+const Login = ({ userName, setUserName, password, setPassword, setUserId }) => {
 
   const navigateToEducator = useNavigate();
   const navigateToCaregiver = useNavigate();
@@ -47,7 +48,6 @@ const Login = ({ userName, setUserName, password, setPassword, userId, setUserId
 
   const handleLogin = () => {
     findEducatorsId();
-    //  e.preventDefault();
     axios.get(logInUrl)
       .then((response) => {
         let id = response.data;
@@ -63,8 +63,8 @@ const Login = ({ userName, setUserName, password, setPassword, userId, setUserId
       .catch((error) => {
         swal.fire({
           icon: 'error',
-          title: 'Något gick fel',
-          text: 'Vänligen försök att logga in igen.'
+          title: 'Användarnamn eller lösenord är fel',
+          text: 'Vänligen försök att logga in igen'
         });
         setUserName('');
         setPassword('');
@@ -74,7 +74,7 @@ const Login = ({ userName, setUserName, password, setPassword, userId, setUserId
   return (
     <div>
       <h1 id="welcome">Välkommen till Förskolan!</h1>
-      <form action="" id="logInForm">
+      <form action="" id="login-form">
         <label id="username">Användarnamn
           <input value={userName} onChange={updateUserName} type="text" />
         </label>
@@ -82,7 +82,7 @@ const Login = ({ userName, setUserName, password, setPassword, userId, setUserId
           <input value={password} onChange={updatePassword} type="text" />
         </label>
       </form>
-      <button onClick={handleLogin} id="logInButton">Logga in</button>
+      <button onClick={handleLogin} id="logIn-button">Logga in</button>
     </div>
   );
 }

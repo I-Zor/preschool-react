@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import '../App.css';
+import '../styling/App.css';
+import '../styling/Educator-absence.css';
 
 const EducatorAbsence = ({ dateToday, absentChildren, absences, setUserName, setPassword, groupName }) => {
 
@@ -8,7 +9,6 @@ const EducatorAbsence = ({ dateToday, absentChildren, absences, setUserName, set
     const navigateToStartPage = useNavigate();
     const navigateToAllChildren = useNavigate();
     const navigateToChildPage = useNavigate();
-
 
     const handleLogOut = () => {
         setUserName('');
@@ -39,16 +39,16 @@ const EducatorAbsence = ({ dateToday, absentChildren, absences, setUserName, set
     return (
         <div>
             <div className="header">
-                <label id="date">{dateToday}</label>
+                <label className="date">{dateToday}</label>
                 <div>
-                    <button onClick={goToStartPage} id="startSiteButton">Startsidan</button>
-                    <button onClick={handleLogOut} className="logOutButton">Logga ut</button>
+                    <button onClick={goToStartPage} className="start-site-button">Startsidan</button>
+                    <button onClick={handleLogOut} className="log-out-button">Logga ut</button>
                 </div>
             </div>
             <div id="educator-absence">
                 <div className="sidebar">
-                    <label className="groupName">{groupName}</label>
-                    <button onClick={goToAllChildren} id="allChildrenButton">Alla barn</button>
+                    <label className="child-name">{groupName}</label>
+                    <button onClick={goToAllChildren} className="all-children-butto">Alla barn</button>
                 </div>
                 <div id="absent-children">
                     {renderChildren}

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import Login from "./components/LogIn";
-import EducatorHomepage from "./components/Educator-homepage";
-import EducatorChildren from "./components/Educator-children";
-import EducatorAbsence from "./components/Educator-absence";
-import EducatorChildInfo from "./components/Educator-childInfo";
-import CaregiverHomepage from "./components/Caregiver-homepage";
-import CaregiverChildPage from "./components/Caregiver-childPage";
+import Login from './sites/LogIn';
+import EducatorHomepage from './sites/Educator-homepage';
+import EducatorChildren from './sites/Educator-children';
+import EducatorAbsence from './sites/Educator-absence';
+import EducatorChildInfo from './sites/Educator-childInfo';
+import CaregiverHomepage from './sites/Caregiver-homepage';
+import CaregiverChildPage from './sites/Caregiver-childPage';
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 
 
@@ -13,15 +13,12 @@ function App() {
 
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
-  const [educator, setEducator] = useState({});
   const [absences, setAbsences] = useState([]);
-  const [presentChildren, setPresentChildren] = useState([]);
   const [absentChildren, setAbsentChildren] = useState([]);
   const [allChildren, setAllChildren] = useState([]);
   const [userId, setUserId] = useState('');
   const [dateToday, setDateToday] = useState('');
   const [groupName, setGroupName] = useState('');
-  const [child, setChild] = useState('');
 
   useEffect(() => {
     function getDate() {
@@ -40,16 +37,11 @@ function App() {
             setUserName={setUserName}
             password={password}
             setPassword={setPassword}
-            userId={userId}
             setUserId={setUserId}
           />} />
           <Route path='/educator' element={<EducatorHomepage
             userId={userId}
             dateToday={dateToday}
-            educator={educator}
-            setEducator={setEducator}
-            presentChildren={presentChildren}
-            absentChildren={absentChildren}
             setAllChildren={setAllChildren}
             setAbsentChildren={setAbsentChildren}
             setAbsences={setAbsences}

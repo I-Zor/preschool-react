@@ -1,0 +1,42 @@
+#caring-time-form {
+    border-style: solid;
+    border-color: rgb(94, 190, 223);
+    background: lightblue;
+    padding: 40px;
+    width: 600px;
+}
+
+.caring-time-picker {
+    display: flex;
+    margin-top: 15px;
+}
+
+#days-checkboxes {
+    height: 200px;
+    display: flex;
+    justify-content: space-evenly;
+    margin-right: 50px;
+}
+
+#days-checkboxes {
+    display: flex;
+    flex-direction: column;
+}
+
+#time-pickers {
+    display: flex;
+}
+
+#time-picker-start {
+    text-align: center;
+    margin-right: 20px;
+}
+
+#time-picker-end {
+    text-align: center;
+}
+
+#close-button {
+    height: 30px;
+    width: 80px;
+}
