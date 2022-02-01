@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import TimePicker from 'react-time-picker';
 import axios from "axios";
 import Modal from 'react-modal';
-import '../App.css';
+import '../styling/App.css';
 import '../styling/CaringTimeForm.css';
 
 Modal.setAppElement('#root');

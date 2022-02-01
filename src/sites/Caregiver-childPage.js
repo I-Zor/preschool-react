@@ -13,10 +13,10 @@ const CaregiverChildPage = ({ dateToday, setUserName, setPassword }) => {
     const [groupId, setGroupId] = useState('');
     const [caringTimes, setCaringTimes] = useState([]);
     const [educators, setEducators] = useState([]);
-
     const logOut = useNavigate();
     const navigateToStartPage = useNavigate();
 
+    let childId = localStorage.getItem("childId");
 
     const handleLogOut = () => {
         setUserName('');
@@ -29,33 +29,28 @@ const CaregiverChildPage = ({ dateToday, setUserName, setPassword }) => {
     };
 
     const renderCaringTimeWeekday = caringTimes.map((weekday) =>
-        <h4 className="rendered-info" key={weekday.id} id={weekday.id}>{weekday.weekday}</h4>);
+        <label className="rendered-info" key={weekday.id} id={weekday.id}>{weekday.weekday}</label>);
 
     const renderCaringTimeHours = caringTimes.map((time) =>
-        <h4 className="rendered-info" key={time.id} id={time.id}>{time.startHour}:{time.startMinut} - {time.endHour}:{time.endMinut}</h4>);
-
-    const renderChangeButtons = caringTimes.map((time) =>
-        <button onClick={() => setShow(true)} className="register-change-button" id={time.id} key={time.id}>Ändra</button>);
+        <label className="rendered-info" key={time.id} id={time.id}>{time.startHour}:{time.startMinut} - {time.endHour}:{time.endMinut}</label>);
 
     const renderEducatorsName = educators.map((educator) =>
-        <h4 className="rendered-name" key={educator.id}>{educator.personalInformation.firstName} {educator.personalInformation.lastName} </h4>);
+        <label className="rendered-name" key={educator.id}>{educator.personalInformation.firstName} {educator.personalInformation.lastName} </label>);
 
     const renderEducatorsInfo = educators.map((educator) =>
-        <h4 className="rendered-info" key={educator.id}>{educator.contactInformation.phoneNumber} <br /> {educator.contactInformation.email}</h4>);
+        <label className="rendered-info" key={educator.id}>{educator.contactInformation.phoneNumber} <br /> {educator.contactInformation.email}</label>);
 
 
     useEffect(() => {
         function getChild() {
-            let childId = window.sessionStorage.getItem("childId");
             let getChildUrl = 'http://localhost:8080/caregiver/child/' + childId;
             Axios.get(getChildUrl)
                 .then((response) => {
-                    let child = response.data;
-                    console.log(child);
-                    setChildName(child.personalInformation.firstName);
-                    setGroupName(child.preschoolGroup.name);
-                    setGroupId(child.preschoolGroup.id)
-                    setCaringTimes(child.caringTimes);
+                    let foundChild = response.data;
+                    setChildName(foundChild.personalInformation.firstName);
+                    setGroupName(foundChild.preschoolGroup.name);
+                    setGroupId(foundChild.preschoolGroup.id)
+                    setCaringTimes(foundChild.caringTimes);
                 })
                 .catch((error) => {
                     console.log(error);
@@ -67,7 +62,6 @@ const CaregiverChildPage = ({ dateToday, setUserName, setPassword }) => {
             Axios.get(getEducatorsinGroupUrl)
                 .then((response) => {
                     let educators = response.data;
-                    console.log(educators);
                     setEducators(educators);
                 })
                 .catch((error) => {
@@ -76,15 +70,40 @@ const CaregiverChildPage = ({ dateToday, setUserName, setPassword }) => {
         };
         getChild();
         getEducatorsInGroup();
-    }, [groupId]);
+    }, [groupId, childId]);
+
+    function getCaringTimes() {
+        caringTimes.forEach(caringTime => {
+            if (caringTime.weekday === 'Måndag') {
+                localStorage.setItem("monday", JSON.stringify(caringTime));
+            };
+            if (caringTime.weekday === 'Tisdag') {
+                localStorage.setItem("tuesday", JSON.stringify(caringTime));
+            };
+            if (caringTime.weekday === 'Onsdag') {
+                localStorage.setItem("wednesday", JSON.stringify(caringTime));
+            };
+            if (caringTime.weekday === 'Torsdag') {
+                localStorage.setItem("thursday", JSON.stringify(caringTime));
+            };
+            if (caringTime.weekday === 'Fredag') {
+                localStorage.setItem("friday", JSON.stringify(caringTime));
+            };
+        });
+    };
+
+    function getTimesAndShow() {
+        getCaringTimes();
+        setShow(true);
+    }
 
     return (
         <div>
             <div className="header">
                 <label className="date">{dateToday}</label>
                 <div>
-                    <button onClick={goToStartPage} id="startSiteButton">Startsidan</button>
-                    <button onClick={handleLogOut} className="logOutButton">Logga ut</button>
+                    <button onClick={goToStartPage} className="start-site-button">Startsidan</button>
+                    <button onClick={handleLogOut} className="log-out-button">Logga ut</button>
                 </div>
             </div>
             <div className="container">
@@ -101,22 +120,23 @@ const CaregiverChildPage = ({ dateToday, setUserName, setPassword }) => {
                             {renderEducatorsInfo}
                         </div>
                     </div>
-                    <h3 id="caring-time-title-caregiver">Omsörgstider</h3>
+                    <label id="caring-time-title-caregiver">Omsörgstider</label>
                     <div id="caring-times-info-caregiver">
-                        <div id="caring-times-caregiver">
+                        <div className="justify-content">
                             {renderCaringTimeWeekday}
                         </div>
-                        <div id="week-times-caregiver">
+                        <div className="justify-content">
                             {renderCaringTimeHours}
                         </div>
-                        <div id="change-buttons">
-                            {renderChangeButtons}
+                        <div className="justify-content">
+                        <button onClick={() => getTimesAndShow()} className="register-change-button" >Ändra</button>
                             <CaringTimeForm show={show} close={() => setShow(false)} />
                         </div>
                     </div>
                 </div>
             </div>
             <div className="footer">
+                <label className="footer-font-size">Förskolan Hogwarts --- Hogwartsvägen 1 --- 070 555 55 55</label>
             </div>
         </div>
     );
