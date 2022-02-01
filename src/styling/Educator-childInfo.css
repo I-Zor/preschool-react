@@ -11,17 +11,14 @@
   margin-top: 20px;
 }
 
-#week-days {
-  margin-right: 20px;
-}
-
 #child-info {
-  margin-top: 80px;
-  margin-left: 300px;
+  margin-top: 50px;
+  margin-left: 200px;
 }
 
-#rendered-address {
+.rendered-address {
   display: flex;
   width: 400px;
   margin-bottom: 10px;
 }
+

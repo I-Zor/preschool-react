@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import '../App.css';
+import '../styling/App.css';
 import '../styling/Educator-childInfo.css';
-import { useNavigate } from "react-router-dom"; import '../App.css';
+import { useNavigate } from "react-router-dom";
 
 
-const EducatorChildInfo = ({ dateToday, groupName, setUserName, setPassword }) => {
+const EducatorChildInfo = ({ dateToday, setUserName, setPassword }) => {
+
+    let childId = localStorage.getItem("childId");
+    let groupName = localStorage.getItem("groupName");
 
     const [childFirstName, setChildFirstName] = useState('');
     const [childLastName, setChildLastName] = useState('');
@@ -35,7 +38,6 @@ const EducatorChildInfo = ({ dateToday, groupName, setUserName, setPassword }) =
     };
 
     useEffect(() => {
-        let childId = window.sessionStorage.getItem("childId");
         let getChildUrl = 'http://localhost:8080/educator/child/' + childId;
         axios.get(getChildUrl)
             .then((response) => {
@@ -53,25 +55,25 @@ const EducatorChildInfo = ({ dateToday, groupName, setUserName, setPassword }) =
             .catch((error) => {
                 console.log(error);
             });
-    }, []);
+    }, [childId]);
 
     const renderCaregiversName = caregivers.map((caregiver) =>
         <h4 className="rendered-name" key={caregiver.id}>{caregiver.personalInformation.firstName} {caregiver.personalInformation.lastName} </h4>);
 
     const renderCaregiversAddress = caregivers.map((caregiver) =>
-        <h4 id="rendered-address" key={caregiver.id}>{caregiver.personalInformation.address}<br /> {caregiver.personalInformation.zipCode.number} {caregiver.personalInformation.city.name}</h4>);
+        <h4 className="rendered-address" key={caregiver.id}>{caregiver.personalInformation.address}<br /> {caregiver.personalInformation.zipCode.number} {caregiver.personalInformation.city.name}</h4>);
 
     const renderCaregiversInfo = caregivers.map((caregiver) =>
-        <h4 className="rendered-info" key={caregiver.id}>{caregiver.contactInformation.phoneNumber} <br /> {caregiver.contactInformation.email}</h4>);
+        <h3 className="rendered-address" key={caregiver.id}>{caregiver.contactInformation.phoneNumber} <br /> {caregiver.contactInformation.email}</h3>);
 
     const renderRelativesName = relatives.map((relative) =>
         <h4 className="rendered-name" key={relative.id}>{relative.firstName} {relative.lastName} </h4>);
 
     const renderRelativesRelation = relatives.map((relative) =>
-        <h4 className="rendered-name" key={relative.id}>{relative.relationToChild} </h4>);
+        <h4 className="rendered-address" key={relative.id}>{relative.relationToChild} </h4>);
 
     const renderRelativesInfo = relatives.map((relative) =>
-        <h4 className="rendered-info" key={relative.id}>{relative.contactInformation.phoneNumber} <br /> {relative.contactInformation.email}</h4>);
+        <h3 className="rendered-address" key={relative.id}>{relative.contactInformation.phoneNumber} <br /> {relative.contactInformation.email}</h3>);
 
     const renderCaringTimeWeekday = caringTimes.map((weekday) =>
         <h4 className="rendered-info" key={weekday.id} id={weekday.id}>{weekday.weekday}</h4>);
@@ -97,7 +99,7 @@ const EducatorChildInfo = ({ dateToday, groupName, setUserName, setPassword }) =
                     <h2>{childFirstName} {childLastName}</h2>
                     <h3>{childAddress}</h3>
                     <h3 id="child-city">{childZipCode} {childCity}</h3>
-                    <h4>Vårdnadshavare:</h4>
+                    <h3>Vårdnadshavare:</h3>
                     <div className="caregivers">
                         <div className="container">
                             {renderCaregiversName}
@@ -109,23 +111,19 @@ const EducatorChildInfo = ({ dateToday, groupName, setUserName, setPassword }) =
                             {renderCaregiversInfo}
                         </div>
                     </div>
-                    <h4>Närstående:</h4>
-                    <div className="relatives">
-                        <div className="caregivers">
-                            <div className="container">
-                                {renderRelativesName}
-                            </div>
-                            <div className="container">
-                                {renderRelativesRelation}
-                            </div>
-                            <div className="container">
-                                {renderRelativesInfo}
-                            </div>
+                    <h3>Närstående:</h3>
+                    <div className="caregivers">
+                        <div className="container">
+                            {renderRelativesName}
+                            {renderRelativesRelation}
+                        </div>
+                        <div className="container">
+                            {renderRelativesInfo}
                         </div>
                     </div>
                     <h3>Omsörgstider</h3>
                     <div id="caring-times-info">
-                        <div id="week-days">
+                        <div >
                             {renderCaringTimeWeekday}
                         </div>
                         <div>
@@ -135,6 +133,7 @@ const EducatorChildInfo = ({ dateToday, groupName, setUserName, setPassword }) =
                 </div>
             </div>
             <div className="footer">
+                <label className="footer-font-size">Förskolan Hogwarts --- Hogwartsvägen 1 --- 070 555 55 55</label>
             </div>
         </div>
     )

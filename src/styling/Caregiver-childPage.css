@@ -7,36 +7,31 @@
 }
 
 #caring-time-title-caregiver {
-  margin-top: 60px;
+  font-size: 25px;
 }
 
 #caring-times-info-caregiver {
   display: flex;
+  flex-direction: row;
   margin-top: 30px;
-  height: 200px;
-  width: 300px;
+  height: 250px;
+  border-style: solid;
+  width: 700px;
+  padding-left: 80px;
+  padding-top: 40px;
+  padding-bottom: 40px;
 }
 
-#caring-times-caregiver {
+.justify-content {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-}
-
-#week-times-caregiver {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-}
-
-#change-buttons {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
+  width: 200px;
 }
 
 #name {
   display: flex;
+  justify-content: center;
   font-size: 25px;
   padding-left: 40px;
   padding-right: 40px;
@@ -53,5 +48,5 @@
 .register-change-button {
   font-size: 18px;
   width: 100px;
-  height: 30px;
+  height: 50px;
 }

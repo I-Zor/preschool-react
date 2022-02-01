@@ -16,7 +16,6 @@ function App() {
   const [absences, setAbsences] = useState([]);
   const [absentChildren, setAbsentChildren] = useState([]);
   const [allChildren, setAllChildren] = useState([]);
-  const [userId, setUserId] = useState('');
   const [dateToday, setDateToday] = useState('');
   const [groupName, setGroupName] = useState('');
 
@@ -37,10 +36,8 @@ function App() {
             setUserName={setUserName}
             password={password}
             setPassword={setPassword}
-            setUserId={setUserId}
           />} />
           <Route path='/educator' element={<EducatorHomepage
-            userId={userId}
             dateToday={dateToday}
             setAllChildren={setAllChildren}
             setAbsentChildren={setAbsentChildren}
@@ -68,7 +65,6 @@ function App() {
             setUserName={setUserName}
             setPassword={setPassword} />} />
           <Route path='/caregiver' element={<CaregiverHomepage
-            userId={userId}
             dateToday={dateToday}
             setUserName={setUserName}
             setPassword={setPassword}

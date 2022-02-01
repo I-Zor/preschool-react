@@ -1,9 +1,9 @@
 #absence-form {
-    border-style: solid;
-    border-color: rgb(94, 190, 223);
+    border-color: var(--dark);
     padding: 30px;
-    width: 660px;
-    background: lightblue;
+    width: 600px;
+    height: 400px;
+    background: var(--dark);
   }
 
   #date-today-form {
@@ -13,20 +13,23 @@
 
   #checkbox-today {
     margin-right: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 30px;
+    font-size: 25px;
   }
 
   #date-picker {
     margin-top: 15px;
-    margin-bottom: 15px;
+    margin-bottom: 30px;
   }
 
-  .reason {
-    margin-left: 30px;
-    font-size: 20px;
+  #reason {
+    width: 418px;
+    height: 30px;
+    margin-left: 20px;
   }
 
   #checkbox-offtime {
     margin-right: 10px;
+    margin-top: 30px;
   }
   

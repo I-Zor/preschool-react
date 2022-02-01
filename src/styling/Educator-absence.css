@@ -1,9 +1,33 @@
 #absent-children {
   display: flex;
+  flex-direction: column;
   margin-top: 80px;
-  margin-left: 300px;
+  margin-left: 400px;
 }
 
-#educator-absence {
+.reason {
+  font-size: 20px;
+  margin-left: 50px;
+  margin-top: 15px;
+  margin-bottom: 25px;
+  font-family: Lato;
+  color: var(--primary);
+
+}
+
+#render-container {
   display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+#render-reason {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+#absent-list {
+display: flex;
+margin-top: 15px;
 }

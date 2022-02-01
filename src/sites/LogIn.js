@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import swal from 'sweetalert2';
-import '../App.css';
+import '../styling/App.css';
 import '../styling/LogIn.css';
 
-const Login = ({ userName, setUserName, password, setPassword, setUserId }) => {
+const Login = ({ userName, setUserName, password, setPassword }) => {
 
   const navigateToEducator = useNavigate();
   const navigateToCaregiver = useNavigate();
@@ -52,7 +52,7 @@ const Login = ({ userName, setUserName, password, setPassword, setUserId }) => {
       .then((response) => {
         let id = response.data;
         let foundEducator = educatorsIds.find(element => element === id);
-        setUserId(id);
+        localStorage.setItem("userId", id);
         if (foundEducator) {
           navigateToEducator('/educator');
         }
@@ -72,14 +72,14 @@ const Login = ({ userName, setUserName, password, setPassword, setUserId }) => {
   }
 
   return (
-    <div>
-      <h1 id="welcome">Välkommen till Förskolan!</h1>
+    <div className="page">
+      <h1 id="welcome">Välkommen till Förskolan Hogwarts</h1>
       <form action="" id="login-form">
         <label id="username">Användarnamn
-          <input value={userName} onChange={updateUserName} type="text" />
+          <input className="input" value={userName} onChange={updateUserName} type="text" />
         </label>
         <label id="password">Lösenord
-          <input value={password} onChange={updatePassword} type="text" />
+          <input className="input" value={password} onChange={updatePassword} type="text" />
         </label>
       </form>
       <button onClick={handleLogin} id="logIn-button">Logga in</button>

@@ -1,18 +1,20 @@
-#educator-children {
-  display: flex;
-}
-
 #child-list {
   display: flex;
   flex-direction: row;
-  margin-top: 80px;
-  margin-left: 300px;
+  margin-top: 100px;
+  margin-left: 400px;
+  justify-content: space-evenly;
 }
 
 .child-button {
   font-size: 18px;
   width: 330px;
   height: 40px;
+  margin-bottom: 15px;
+  margin-right: 60px;
+  background-color: var(--button);
+  color: #36130e;
+  border-radius: 10px;
 }
 
 #render-present {

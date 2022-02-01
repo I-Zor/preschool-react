@@ -8,10 +8,16 @@
 
 #greeting-educator {
   margin-bottom: 40px;
+  font-family: Lato;
+  font-size: 42px;
+  color: var(--primary);
 }
 
 #children-counter {
   margin-bottom: 100px;
+  font-family: Lato;
+  font-size: 30px;
+  color: var(--primary);
 }
 
 #absent-children-button {
@@ -20,9 +26,7 @@
   padding-top: 10px;
   padding-bottom: 10px;
   font-size: 20px;
-
-}
-
-#educator-homepage {
-  display: flex;
+  border-radius: 10px;
+  background-color: var(--button);
+  color: var(--primary);
 }

@@ -5,13 +5,16 @@ import '../styling/App.css';
 import '../styling/Educator-children.css';
 
 
-const EducatorChildren = ({ dateToday, allChildren, groupName, setUserName, setPassword }) => {
+const EducatorChildren = ({ dateToday, setUserName, setPassword }) => {
 
     const [show, setShow] = useState(false);
     const logOut = useNavigate();
     const navigateToAllChildren = useNavigate();
     const navigateToStartPage = useNavigate();
     const navigateToChildPage = useNavigate();
+
+    let allChildren = JSON.parse(localStorage.getItem("allChildren"));
+    let groupName = localStorage.getItem("groupName");
 
     const handleLogOut = () => {
         setUserName('');
@@ -29,11 +32,11 @@ const EducatorChildren = ({ dateToday, allChildren, groupName, setUserName, setP
 
     function registerAbsence(e) {
         setShow(true);
-        window.sessionStorage.setItem("childId", e.target.id);
+        localStorage.setItem("childId", e.target.id);
     };
 
     function showChildInfo(e) {
-        window.sessionStorage.setItem("childId", e.target.id);
+        localStorage.setItem("childId", e.target.id);
         navigateToChildPage('/educator/child');
     }
 
@@ -42,7 +45,7 @@ const EducatorChildren = ({ dateToday, allChildren, groupName, setUserName, setP
 
     const renderRegisterAbsenceButtons = allChildren.map((child) =>
         <button onClick={registerAbsence} className="register-absence-button" id={child.id} key={child.id}>Anmäl frånvaro</button>);
-    
+
     return (
         <div>
             <div className="header">
@@ -52,22 +55,23 @@ const EducatorChildren = ({ dateToday, allChildren, groupName, setUserName, setP
                     <button onClick={handleLogOut} className="log-out-button">Logga ut</button>
                 </div>
             </div>
-            <div id="educator-children">
+            <div className="container">
                 <div className="sidebar">
                     <label className="child-name">{groupName}</label>
                     <button onClick={goToAllChildren} className="all-children-button">Alla barn</button>
                 </div>
                 <div id="child-list">
-                    <div id="render-present">
+                    <div className="render-container">
                         {renderPresentChildren}
                     </div>
-                    <div>
+                    <div className="render-container">
                         {renderRegisterAbsenceButtons}
                     </div>
                 </div>
                 <AbsenceForm show={show} close={() => setShow(false)} />
             </div>
             <div className="footer">
+                <label className="footer-font-size">Förskolan Hogwarts --- Hogwartsvägen 1 --- 070 555 55 55</label>
             </div>
         </div>
     )

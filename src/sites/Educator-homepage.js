@@ -4,12 +4,13 @@ import { useNavigate } from "react-router-dom";
 import '../styling/App.css';
 import '../styling/Educator-homepage.css';
 
-const EducatorHomepage = ({userId, dateToday, groupName, setGroupName, setAllChildren, setAbsences, setAbsentChildren, setUserName, setPassword }) => {
+const EducatorHomepage = ({ dateToday, setUserName, setPassword }) => {
 
-    const [educatorId, setEducatorId] = useState(userId);
+    let educatorId = localStorage.getItem("userId");
     const [groupId, setGroupId] = useState('');
     const [numberOfPresences, setNumberOfPresences] = useState('');
     const [educatorsName, setEducatorsName] = useState('');
+    const [groupName, setGroupName] = useState('');
 
     const logOut = useNavigate();
     const navigateToAbsentChildren = useNavigate();
@@ -23,6 +24,8 @@ const EducatorHomepage = ({userId, dateToday, groupName, setGroupName, setAllChi
                     let user = response.data;
                     setGroupId(user.preschoolGroup.id);
                     setGroupName(user.preschoolGroup.name);
+                    localStorage.setItem("groupId", user.preschoolGroup.id);
+                    localStorage.setItem("groupName", user.preschoolGroup.name);
                     setEducatorsName(user.personalInformation.firstName);
                 })
                 .catch((error) => {
@@ -51,11 +54,11 @@ const EducatorHomepage = ({userId, dateToday, groupName, setGroupName, setAllChi
             axios.get(getAbsenceTodayUrl)
                 .then((response) => {
                     let absenceList = response.data;
-                    setAbsences(absenceList);
+                    localStorage.setItem("absences", JSON.stringify(absenceList));
                     absenceList.forEach(element => {
                         list.push(element.child);
                     });
-                    setAbsentChildren(list);
+                    localStorage.setItem("absentChildren", JSON.stringify(list));
                 })
         };
 
@@ -64,7 +67,7 @@ const EducatorHomepage = ({userId, dateToday, groupName, setGroupName, setAllChi
             axios.get(getAllChildren)
                 .then((response) => {
                     let allChildren = response.data;
-                    setAllChildren(allChildren);
+                    localStorage.setItem("allChildren", JSON.stringify(allChildren));
                 })
                 .catch((error) => {
                     console.log(error);
@@ -74,7 +77,7 @@ const EducatorHomepage = ({userId, dateToday, groupName, setGroupName, setAllChi
         getPresence();
         getAbsence();
         getAllChildren();
-    }, [groupId, educatorId, setAbsentChildren, setAbsences, setGroupName, setAllChildren]);
+    }, [groupId, educatorId]);
 
     const handleLogOut = () => {
         setUserName('');
@@ -96,7 +99,7 @@ const EducatorHomepage = ({userId, dateToday, groupName, setGroupName, setAllChi
                 <label className="date">{dateToday}</label>
                 <button onClick={handleLogOut} className="log-out-button">Logga ut</button>
             </div>
-            <div id="educator-homepage">
+            <div className="container">
                 <div className="sidebar">
                     <label className="child-name">{groupName}</label>
                     <button onClick={goToAllChildren} className="all-children-button">Alla barn</button>
@@ -108,6 +111,7 @@ const EducatorHomepage = ({userId, dateToday, groupName, setGroupName, setAllChi
                 </div>
             </div>
             <div className="footer">
+                <label className="footer-font-size">Förskolan Hogwarts --- Hogwartsvägen 1 --- 070 555 55 55</label>
             </div>
         </div>
     )

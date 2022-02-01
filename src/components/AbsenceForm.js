@@ -23,7 +23,7 @@ const AbsenceForm = (props) => {
     let chosenDate = startDate;
     let convertedDate = chosenDate.toISOString().slice(0, 10);
 
-    let childId = window.sessionStorage.getItem("childId");
+    let childId = localStorage.getItem("childId");
 
     function setDateToToday(e) {
         if (e.target.checked) {
@@ -84,23 +84,23 @@ const AbsenceForm = (props) => {
                 <div id="absence-form">
                     <div>
                         <div id="date-today-form">
-                            <label>
+                            <label className="font-size">
                                 <input type="checkbox" id="checkbox-today" onChange={setDateToToday} />
                                 Idag
                             </label>
-                            <label>Eller välj annan dag (tryck på datumet nedanför)</label>
+                            <label className="font-size">Eller välj annan dag (tryck på datumet nedanför)</label>
                         </div>
                         <div id="date-picker">
                             <DatePicker locale="sv" selected={startDate} onChange={(date) => setStartDate(date)} />
                         </div>
                         <div id="reason-form">
                             <form>
-                                <label> Anledning:
+                                <label className="font-size"> Anledning:
                                     <input type="text" id="reason" onChange={getReason} />
                                 </label>
                             </form>
                         </div>
-                        <label>
+                        <label className="font-size">
                             <input type="checkbox" id="checkbox-offtime" onChange={setReasonAsDayOff} />
                             Ledig
                         </label>

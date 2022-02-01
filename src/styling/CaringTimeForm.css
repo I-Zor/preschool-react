@@ -4,6 +4,7 @@
     background: lightblue;
     padding: 40px;
     width: 600px;
+    height: 400px;
 }
 
 .caring-time-picker {
@@ -21,22 +22,25 @@
 #days-checkboxes {
     display: flex;
     flex-direction: column;
+    margin-right: 80px;
 }
 
-#time-pickers {
-    display: flex;
-}
 
-#time-picker-start {
+.time-picker-start {
     text-align: center;
     margin-right: 20px;
+    margin-top: 10px;
 }
 
-#time-picker-end {
+.time-picker-end {
     text-align: center;
+    margin-top: 10px;
 }
 
-#close-button {
-    height: 30px;
-    width: 80px;
-}
+#buttons-modal {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+  }
+  
+
