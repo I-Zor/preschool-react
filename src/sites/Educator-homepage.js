@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Footer from "../components/Footer";
+import Header from "../components/Header";
 import '../styling/App.css';
 import '../styling/Educator-homepage.css';
 
 const EducatorHomepage = ({ dateToday, setUserName, setPassword }) => {
 
     let educatorId = localStorage.getItem("userId");
+
     const [groupId, setGroupId] = useState('');
     const [numberOfPresences, setNumberOfPresences] = useState('');
     const [educatorsName, setEducatorsName] = useState('');
     const [groupName, setGroupName] = useState('');
 
-    const logOut = useNavigate();
     const navigateToAbsentChildren = useNavigate();
     const navigateToAllChildren = useNavigate();
 
@@ -32,7 +34,8 @@ const EducatorHomepage = ({ dateToday, setUserName, setPassword }) => {
                     console.log(error);
                 })
         };
-        const getPresence = () => {
+
+        function getPresence() {
             let list = [];
             const getPresenceTodayUrl = 'http://localhost:8080/educator/present/' + groupId;
             axios.get(getPresenceTodayUrl)
@@ -48,7 +51,7 @@ const EducatorHomepage = ({ dateToday, setUserName, setPassword }) => {
                 });
         };
 
-        const getAbsence = () => {
+        function getAbsence() {
             let list = [];
             const getAbsenceTodayUrl = 'http://localhost:8080/educator/absence/' + groupId;
             axios.get(getAbsenceTodayUrl)
@@ -60,9 +63,12 @@ const EducatorHomepage = ({ dateToday, setUserName, setPassword }) => {
                     });
                     localStorage.setItem("absentChildren", JSON.stringify(list));
                 })
+                .catch((error) => {
+                    console.log(error);
+                })
         };
 
-        const getAllChildren = () => {
+        function getAllChildren() {
             const getAllChildren = 'http://localhost:8080/educator/children/' + groupId;
             axios.get(getAllChildren)
                 .then((response) => {
@@ -79,40 +85,41 @@ const EducatorHomepage = ({ dateToday, setUserName, setPassword }) => {
         getAllChildren();
     }, [groupId, educatorId]);
 
-    const handleLogOut = () => {
-        setUserName('');
-        setPassword('');
-        logOut('/');
-    }
-
-    const goToAbsentChildren = () => {
+    function goToAbsentChildren() {
         navigateToAbsentChildren('/educator/absence')
     };
 
-    const goToAllChildren = () => {
+    function goToAllChildren() {
         navigateToAllChildren('/educator/children');
     };
 
     return (
         <div >
-            <div className="header">
-                <label className="date">{dateToday}</label>
-                <button onClick={handleLogOut} className="log-out-button">Logga ut</button>
-            </div>
+            <Header
+                dateToday={dateToday}
+                setPassword={setPassword}
+                setUserName={setUserName}>
+            </Header>
             <div className="container">
                 <div className="sidebar">
                     <label className="child-name">{groupName}</label>
-                    <button onClick={goToAllChildren} className="all-children-button">Alla barn</button>
+                    <button
+                        onClick={goToAllChildren}
+                        className="all-children-button">
+                        Alla barn
+                    </button>
                 </div>
                 <div id="welcome-screen">
                     <h1 id="greeting-educator">Välkommen {educatorsName}!</h1>
                     <h2 id="children-counter">Idag är {numberOfPresences} närvarande barn i din grupp.</h2>
-                    <button onClick={goToAbsentChildren} id="absent-children-button">Se frånvarande barn</button>
+                    <button
+                        onClick={goToAbsentChildren}
+                        id="absent-children-button">
+                        Se frånvarande barn
+                    </button>
                 </div>
             </div>
-            <div className="footer">
-                <label className="footer-font-size">Förskolan Hogwarts --- Hogwartsvägen 1 --- 070 555 55 55</label>
-            </div>
+            <Footer></Footer>
         </div>
     )
 }

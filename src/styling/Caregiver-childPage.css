@@ -7,7 +7,9 @@
 }
 
 #caring-time-title-caregiver {
-  font-size: 25px;
+  font-size: 24px;
+  font-family: Lato;
+  color: #36130e;
 }
 
 #caring-times-info-caregiver {
@@ -15,7 +17,8 @@
   flex-direction: row;
   margin-top: 30px;
   height: 250px;
-  border-style: solid;
+  background-color: var(--dark);
+  border-radius: 10px;
   width: 700px;
   padding-left: 80px;
   padding-top: 40px;
@@ -37,16 +40,19 @@
   padding-right: 40px;
   padding-top: 30px;
   padding-bottom: 30px;
+  color: #36130e;
 }
 
 #caregiver-info {
+  margin: 0 auto;
   margin-top: 80px;
-  margin-left: 250px;
-  margin-right: 250px;
 }
 
 .register-change-button {
   font-size: 18px;
   width: 100px;
   height: 50px;
+  background-color: var(--button);
+  border-radius: 10px;
+  color: var(--primary);
 }

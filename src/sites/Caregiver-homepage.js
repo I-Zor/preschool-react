@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Footer from "../components/Footer";
+import Header from "../components/Header";
 import '../styling/App.css';
 import '../styling/Caregiver-homepage.css';
 import AbsenceForm from '../components/AbsenceForm';
@@ -13,16 +15,8 @@ const CaregiverHomepage = ({ dateToday, setUserName, setPassword }) => {
     const [children, setChildren] = useState([]);
 
     const navigateToChildPage = useNavigate();
-    const logOut = useNavigate();
-
-    const handleLogOut = () => {
-        setUserName('');
-        setPassword('');
-        logOut('/');
-    };
 
     useEffect(() => {
-
         function getCaregiver() {
             let getCaregiverUrl = 'http://localhost:8080/caregiver/' + caregiverId;
             Axios.get(getCaregiverUrl)
@@ -50,6 +44,25 @@ const CaregiverHomepage = ({ dateToday, setUserName, setPassword }) => {
         getChildren();
     }, [caregiverId]);
 
+    const renderChildren = children.map((child) =>
+        <button
+            onClick={showChildInfo}
+            className="render-children"
+            id={child.id} key={child.id}>
+            {child.personalInformation.firstName} {child.personalInformation.lastName}<br />
+            {child.preschoolGroup.name}
+        </button>);
+
+
+    const renderRegisterAbsenceButtons = children.map((child) =>
+        <button
+            onClick={registerAbsence}
+            className="register-absence"
+            id={child.id}
+            key={child.id}>
+            Anmäl frånvaro
+        </button>);
+
     function showChildInfo(e) {
         localStorage.setItem("childId", e.target.id);
         navigateToChildPage('/caregiver/child');
@@ -60,19 +73,13 @@ const CaregiverHomepage = ({ dateToday, setUserName, setPassword }) => {
         localStorage.setItem("childId", e.target.id);
     };
 
-    const renderChildren = children.map((child) =>
-        <button onClick={showChildInfo} className="render-children" id={child.id} key={child.id}>{child.personalInformation.firstName} {child.personalInformation.lastName}
-            <br /> {child.preschoolGroup.name}</button>);
-
-    const renderRegisterAbsenceButtons = children.map((child) =>
-        <button onClick={registerAbsence} className="register-absence" id={child.id} key={child.id}>Anmäl frånvaro</button>);
-
     return (
         <div>
-            <div className="header">
-                <label className="date">{dateToday}</label>
-                <button onClick={handleLogOut} className="log-out-button">Logga ut</button>
-            </div>
+            <Header
+                dateToday={dateToday}
+                setPassword={setPassword}
+                setUserName={setUserName}>
+            </Header>
             <div className="container">
                 <div id="welcome-caregiver">
                     <h1 className="font">Välkommen {caregiversName}</h1>
@@ -87,10 +94,7 @@ const CaregiverHomepage = ({ dateToday, setUserName, setPassword }) => {
                     </div>
                 </div>
             </div>
-            <div className="footer">
-                <label className="footer-font-size">Förskolan Hogwarts --- Hogwartsvägen 1 --- 070 555 55 55</label>
-            </div>
-
+            <Footer></Footer>
         </div>
     );
 }

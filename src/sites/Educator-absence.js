@@ -1,63 +1,58 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { useNavigate } from "react-router-dom";
+import Footer from "../components/Footer";
+import HeaderToStartPage from "../components/Header-startPage";
+import Sidebar from "../components/Sidebar";
 import '../styling/App.css';
 import '../styling/Educator-absence.css';
 
-const EducatorAbsence = ({ dateToday, setUserName, setPassword }) => {
+const EducatorAbsence = ({ dateToday, setUserName, setPassword, user, setUser }) => {
 
-    const logOut = useNavigate();
-    const navigateToStartPage = useNavigate();
-    const navigateToAllChildren = useNavigate();
     const navigateToChildPage = useNavigate();
+
+    useEffect(() => {
+        setUser('educator');
+    }, [setUser]);
 
     let absentChildren = JSON.parse(localStorage.getItem("absentChildren"));
     let absences = JSON.parse(localStorage.getItem("absences"));
     let groupName = localStorage.getItem("groupName");
 
-    const handleLogOut = () => {
-        setUserName('');
-        setPassword('');
-        logOut('/');
-    }
-
-    const goToStartPage = () => {
-        navigateToStartPage('/educator');
-    };
-
-    const goToAllChildren = () => {
-        navigateToAllChildren('/educator/children');
-    }
-
     const renderChildren = absentChildren.map((child) =>
-        <button onClick={showChildInfo} className="absent-children" id={child.id} key={child.id}>{child.personalInformation.firstName} {child.personalInformation.lastName}</button>);
+        <button
+            onClick={showChildInfo}
+            className="absent-children"
+            id={child.id}
+            key={child.id}>
+            {child.personalInformation.firstName} {child.personalInformation.lastName}
+        </button>);
+
 
     const renderReason = absences.map((absence) =>
-        <label className="reason" key={absence.id}> {absence.reasonToAbsence}</label>);
+        <label
+            className="reason"
+            key={absence.id}>
+            {absence.reasonToAbsence}
+        </label>);
 
     function showChildInfo(e) {
         localStorage.setItem("childId", e.target.id);
         navigateToChildPage('/educator/child');
     }
 
-
     return (
         <div>
-            <div className="header">
-                <label className="date">{dateToday}</label>
-                <div>
-                    <button onClick={goToStartPage} className="start-site-button">Startsidan</button>
-                    <button onClick={handleLogOut} className="log-out-button">Logga ut</button>
-                </div>
-            </div>
+            <HeaderToStartPage
+                dateToday={dateToday}
+                setPassword={setPassword}
+                setUserName={setUserName}
+                user={user}>
+            </HeaderToStartPage>
             <div className="container">
-                <div className="sidebar">
-                    <label className="child-name">{groupName}</label>
-                    <button onClick={goToAllChildren} className="all-children-button">Alla barn</button>
-                </div>
+                <Sidebar
+                groupName={groupName}>
+                </Sidebar>
                 <div id="absent-children">
-                    <div>
-                    <h3 className="font">Frånvarande barn:</h3>
-                    </div>
                     <div id="absent-list">
                         <div className="render-container">
                             {renderChildren}
@@ -68,9 +63,7 @@ const EducatorAbsence = ({ dateToday, setUserName, setPassword }) => {
                     </div>
                 </div>
             </div>
-            <div className="footer">
-                <label className="footer-font-size">Förskolan Hogwarts --- Hogwartsvägen 1 --- 070 555 55 55</label>
-            </div>
+            <Footer></Footer>
         </div>
     )
 }

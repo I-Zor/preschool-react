@@ -1,8 +1,8 @@
 #absent-children {
   display: flex;
   flex-direction: column;
+  margin: 0 auto;
   margin-top: 80px;
-  margin-left: 400px;
 }
 
 .reason {

@@ -1,10 +1,8 @@
 #caring-time-form {
-    border-style: solid;
-    border-color: rgb(94, 190, 223);
-    background: lightblue;
+    background: var(--dark);
     padding: 40px;
     width: 600px;
-    height: 400px;
+    height: 500px;
 }
 
 .caring-time-picker {
@@ -27,6 +25,7 @@
 
 
 .time-picker-start {
+    flex-direction: column;
     text-align: center;
     margin-right: 20px;
     margin-top: 10px;
@@ -41,6 +40,22 @@
     display: flex;
     justify-content: space-between;
     margin-top: 40px;
-  }
-  
+}
 
+.time-pickers {
+    display: flex;
+    flex-direction: column;
+}
+
+.individual-day {
+    display: flex;
+    flex-direction: row;
+}
+
+#margin-top{
+    margin-top: 120px;
+}
+
+.react-time-picker__wrapper{
+    background-color: var(--light);
+}

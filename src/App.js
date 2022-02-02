@@ -18,6 +18,7 @@ function App() {
   const [allChildren, setAllChildren] = useState([]);
   const [dateToday, setDateToday] = useState('');
   const [groupName, setGroupName] = useState('');
+  const [user, setUser] = useState('');
 
   useEffect(() => {
     function getDate() {
@@ -51,28 +52,36 @@ function App() {
             setUserName={setUserName}
             setPassword={setPassword}
             groupName={groupName}
-            dateToday={dateToday} />} />
+            dateToday={dateToday}
+            user={user}
+            setUser={setUser} />} />
           <Route path='/educator/absence' element={<EducatorAbsence
             absentChildren={absentChildren}
             absences={absences}
             setUserName={setUserName}
             setPassword={setPassword}
             dateToday={dateToday}
-            groupName={groupName} />} />
+            groupName={groupName}
+            user={user}
+            setUser={setUser} />} />
           <Route path='/educator/child' element={<EducatorChildInfo
             dateToday={dateToday}
             groupName={groupName}
             setUserName={setUserName}
-            setPassword={setPassword} />} />
+            setPassword={setPassword}
+            user={user}
+            setUser={setUser} />} />
           <Route path='/caregiver' element={<CaregiverHomepage
             dateToday={dateToday}
             setUserName={setUserName}
             setPassword={setPassword}
-             />} />
+          />} />
           <Route path='/caregiver/child' element={<CaregiverChildPage
             dateToday={dateToday}
             setUserName={setUserName}
-            setPassword={setPassword} />} />
+            setPassword={setPassword}
+            setUser={setUser}
+            user={user} />} />
         </Routes>
       </div>
     </BrowserRouter>

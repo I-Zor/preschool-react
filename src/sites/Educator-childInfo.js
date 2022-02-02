@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import Axios from "axios";
+import Footer from "../components/Footer";
+import HeaderToStartPage from "../components/Header-startPage";
+import Sidebar from "../components/Sidebar";
 import '../styling/App.css';
 import '../styling/Educator-childInfo.css';
-import { useNavigate } from "react-router-dom";
 
-
-const EducatorChildInfo = ({ dateToday, setUserName, setPassword }) => {
+const EducatorChildInfo = ({ dateToday, setUserName, setPassword, setUser, user }) => {
 
     let childId = localStorage.getItem("childId");
     let groupName = localStorage.getItem("groupName");
@@ -19,27 +20,12 @@ const EducatorChildInfo = ({ dateToday, setUserName, setPassword }) => {
     const [relatives, setRelatives] = useState([]);
     const [caringTimes, setCaringTimes] = useState([]);
 
-    const logOut = useNavigate();
-    const navigateToAllChildren = useNavigate();
-    const navigateToStartPage = useNavigate();
-
-    const handleLogOut = () => {
-        setUserName('');
-        setPassword('');
-        logOut('/');
-    };
-
-    const goToAllChildren = () => {
-        navigateToAllChildren('/educator/children');
-    };
-
-    const goToStartPage = () => {
-        navigateToStartPage('/educator');
-    };
-
     useEffect(() => {
+
+        setUser('educator');
+
         let getChildUrl = 'http://localhost:8080/educator/child/' + childId;
-        axios.get(getChildUrl)
+        Axios.get(getChildUrl)
             .then((response) => {
                 let child = response.data;
                 console.log(child);
@@ -55,86 +41,133 @@ const EducatorChildInfo = ({ dateToday, setUserName, setPassword }) => {
             .catch((error) => {
                 console.log(error);
             });
-    }, [childId]);
+    }, [childId, setUser]);
 
     const renderCaregiversName = caregivers.map((caregiver) =>
-        <h4 className="rendered-name" key={caregiver.id}>{caregiver.personalInformation.firstName} {caregiver.personalInformation.lastName} </h4>);
+        <h4
+            className="rendered-name"
+            key={caregiver.id}>
+            {caregiver.personalInformation.firstName} {caregiver.personalInformation.lastName}
+        </h4>);
 
     const renderCaregiversAddress = caregivers.map((caregiver) =>
-        <h4 className="rendered-address" key={caregiver.id}>{caregiver.personalInformation.address}<br /> {caregiver.personalInformation.zipCode.number} {caregiver.personalInformation.city.name}</h4>);
+        <h4
+            className="rendered-address"
+            key={caregiver.id}>
+            {caregiver.personalInformation.address}<br />
+            {caregiver.personalInformation.zipCode.number} {caregiver.personalInformation.city.name}
+        </h4>);
 
     const renderCaregiversInfo = caregivers.map((caregiver) =>
-        <h3 className="rendered-address" key={caregiver.id}>{caregiver.contactInformation.phoneNumber} <br /> {caregiver.contactInformation.email}</h3>);
+        <h3
+            className="rendered-address"
+            key={caregiver.id}>
+            {caregiver.contactInformation.phoneNumber} <br />
+            {caregiver.contactInformation.email}
+        </h3>);
 
     const renderRelativesName = relatives.map((relative) =>
-        <h4 className="rendered-name" key={relative.id}>{relative.firstName} {relative.lastName} </h4>);
+        <h4
+            className="rendered-name"
+            key={relative.id}>
+            {relative.firstName} {relative.lastName}
+        </h4>);
 
     const renderRelativesRelation = relatives.map((relative) =>
-        <h4 className="rendered-address" key={relative.id}>{relative.relationToChild} </h4>);
+        <h4
+            className="rendered-address"
+            key={relative.id}>
+            {relative.relationToChild}
+        </h4>);
 
     const renderRelativesInfo = relatives.map((relative) =>
-        <h3 className="rendered-address" key={relative.id}>{relative.contactInformation.phoneNumber} <br /> {relative.contactInformation.email}</h3>);
+        <h3
+            className="rendered-address"
+            key={relative.id}>
+            {relative.contactInformation.phoneNumber} <br />
+            {relative.contactInformation.email}
+        </h3>);
 
     const renderCaringTimeWeekday = caringTimes.map((weekday) =>
-        <h4 className="rendered-info" key={weekday.id} id={weekday.id}>{weekday.weekday}</h4>);
+        <h4
+            className="rendered-info-space"
+            key={weekday.id}
+            id={weekday.id}>
+            {weekday.weekday}
+        </h4>);
 
     const renderCaringTimeHours = caringTimes.map((time) =>
-        <h4 className="rendered-info" key={time.id} id={time.id}>{time.startHour}:{time.startMinut} - {time.endHour}:{time.endMinut}</h4>);
+        <h4
+            className="rendered-info-minor"
+            key={time.id}
+            id={time.id}>
+            {time.startHour}:{time.startMinut} - {time.endHour}:{time.endMinut}
+        </h4>);
 
     return (
         <div>
-            <div className="header">
-                <label className="date">{dateToday}</label>
-                <div>
-                    <button onClick={goToStartPage} className="start-site-button">Startsidan</button>
-                    <button onClick={handleLogOut} className="log-out-button">Logga ut</button>
-                </div>
-            </div>
+            <HeaderToStartPage
+                dateToday={dateToday}
+                setPassword={setPassword}
+                setUserName={setUserName}
+                user={user}>
+            </HeaderToStartPage>
             <div className="container">
-                <div className="sidebar">
-                    <label className="child-name">{groupName}</label>
-                    <button onClick={goToAllChildren} className="all-children-button">Alla barn</button>
-                </div>
+                <Sidebar
+                    groupName={groupName}>
+                </Sidebar>
                 <div id="child-info">
-                    <h2>{childFirstName} {childLastName}</h2>
-                    <h3>{childAddress}</h3>
-                    <h3 id="child-city">{childZipCode} {childCity}</h3>
-                    <h3>Vårdnadshavare:</h3>
-                    <div className="caregivers">
-                        <div className="container">
-                            {renderCaregiversName}
+                    <div>
+                        <h2 className="font">{childFirstName} {childLastName}</h2>
+                        <h3 className="font-dark">{childAddress}</h3>
+                        <h3
+                            className="font-dark"
+                            id="space-bottom">
+                            {childZipCode} {childCity}
+                        </h3>
+                    </div>
+                    <div className="caregivers-info" id="space-bottom">
+                        <div className="caregivers-container" id="space-right">
+                            <h3 className="font">Vårdnadshavare:</h3>
+                            <div className="caregivers">
+                                <div className="caregivers-info" >
+                                    {renderCaregiversName}
+                                </div>
+                                <div className="caregivers-info">
+                                    {renderCaregiversAddress}
+                                </div>
+                                <div className="caregivers-info">
+                                    {renderCaregiversInfo}
+                                </div>
+                            </div>
                         </div>
-                        <div className="container">
-                            {renderCaregiversAddress}
-                        </div>
-                        <div className="container">
-                            {renderCaregiversInfo}
+                        <div className="caregivers-container">
+                            <h3 className="font">Närstående:</h3>
+                            <div className="caregivers">
+                                <div className="caregivers-info">
+                                    {renderRelativesName}
+                                    {renderRelativesRelation}
+                                </div>
+                                <div >
+                                    {renderRelativesInfo}
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <h3>Närstående:</h3>
-                    <div className="caregivers">
-                        <div className="container">
-                            {renderRelativesName}
-                            {renderRelativesRelation}
-                        </div>
-                        <div className="container">
-                            {renderRelativesInfo}
-                        </div>
-                    </div>
-                    <h3>Omsörgstider</h3>
-                    <div id="caring-times-info">
-                        <div >
-                            {renderCaringTimeWeekday}
-                        </div>
-                        <div>
-                            {renderCaringTimeHours}
+                    <div className="caregivers-container">
+                        <h3 className="font">Omsörgstider</h3>
+                        <div id="caring-times-info">
+                            <div>
+                                {renderCaringTimeWeekday}
+                            </div>
+                            <div>
+                                {renderCaringTimeHours}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div className="footer">
-                <label className="footer-font-size">Förskolan Hogwarts --- Hogwartsvägen 1 --- 070 555 55 55</label>
-            </div>
+            <Footer></Footer>
         </div>
     )
 }

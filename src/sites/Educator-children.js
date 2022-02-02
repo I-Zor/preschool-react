@@ -1,34 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AbsenceForm from '../components/AbsenceForm';
 import { useNavigate } from "react-router-dom";
+import Footer from "../components/Footer";
+import HeaderToStartPage from "../components/Header-startPage";
+import Sidebar from "../components/Sidebar";
 import '../styling/App.css';
 import '../styling/Educator-children.css';
 
-
-const EducatorChildren = ({ dateToday, setUserName, setPassword }) => {
+const EducatorChildren = ({ dateToday, setUserName, setPassword, user, setUser }) => {
 
     const [show, setShow] = useState(false);
-    const logOut = useNavigate();
-    const navigateToAllChildren = useNavigate();
-    const navigateToStartPage = useNavigate();
+
     const navigateToChildPage = useNavigate();
 
     let allChildren = JSON.parse(localStorage.getItem("allChildren"));
     let groupName = localStorage.getItem("groupName");
 
-    const handleLogOut = () => {
-        setUserName('');
-        setPassword('');
-        logOut('/');
-    };
+    const renderPresentChildren = allChildren.map((child) =>
+        <button
+            onClick={showChildInfo}
+            className="child-button"
+            id={child.id}
+            key={child.id}>
+            {child.personalInformation.firstName} {child.personalInformation.lastName}
+        </button>);
 
-    const goToAllChildren = () => {
-        navigateToAllChildren('/educator/children');
-    };
+    const renderRegisterAbsenceButtons = allChildren.map((child) =>
+        <button
+            onClick={registerAbsence}
+            className="register-absence-button"
+            id={child.id}
+            key={child.id}>
+            Anmäl frånvaro
+        </button>);
 
-    const goToStartPage = () => {
-        navigateToStartPage('/educator');
-    };
+    useEffect(() => {
+        setUser('educator');
+    }, [setUser]);
 
     function registerAbsence(e) {
         setShow(true);
@@ -40,26 +48,18 @@ const EducatorChildren = ({ dateToday, setUserName, setPassword }) => {
         navigateToChildPage('/educator/child');
     }
 
-    const renderPresentChildren = allChildren.map((child) =>
-        <button onClick={showChildInfo} className="child-button" id={child.id} key={child.id}>{child.personalInformation.firstName} {child.personalInformation.lastName}</button>);
-
-    const renderRegisterAbsenceButtons = allChildren.map((child) =>
-        <button onClick={registerAbsence} className="register-absence-button" id={child.id} key={child.id}>Anmäl frånvaro</button>);
-
     return (
         <div>
-            <div className="header">
-                <label className="date">{dateToday}</label>
-                <div>
-                    <button onClick={goToStartPage} className="start-site-button">Startsidan</button>
-                    <button onClick={handleLogOut} className="log-out-button">Logga ut</button>
-                </div>
-            </div>
+            <HeaderToStartPage
+                dateToday={dateToday}
+                setPassword={setPassword}
+                setUserName={setUserName}
+                user={user}>
+            </HeaderToStartPage>
             <div className="container">
-                <div className="sidebar">
-                    <label className="child-name">{groupName}</label>
-                    <button onClick={goToAllChildren} className="all-children-button">Alla barn</button>
-                </div>
+                <Sidebar
+                    groupName={groupName}>
+                </Sidebar>
                 <div id="child-list">
                     <div className="render-container">
                         {renderPresentChildren}
@@ -70,9 +70,7 @@ const EducatorChildren = ({ dateToday, setUserName, setPassword }) => {
                 </div>
                 <AbsenceForm show={show} close={() => setShow(false)} />
             </div>
-            <div className="footer">
-                <label className="footer-font-size">Förskolan Hogwarts --- Hogwartsvägen 1 --- 070 555 55 55</label>
-            </div>
+            <Footer></Footer>
         </div>
     )
 }

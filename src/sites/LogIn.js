@@ -16,18 +16,16 @@ const Login = ({ userName, setUserName, password, setPassword }) => {
   const logInUrl = 'http://localhost:8080/login/' + userName + '/' + password;
   const educatorsUrl = 'http://localhost:8080/educator';
 
-  const updateUserName = e => {
-    e.preventDefault();
+  function updateUserName(e) {
     setUserName(e.target.value);
   }
 
-  const updatePassword = e => {
-    e.preventDefault();
+  function updatePassword(e) {
     setPassword(e.target.value);
   }
 
   useEffect(() => {
-    const getAllEducators = () => {
+    function getAllEducators() {
       axios.get(educatorsUrl)
         .then((response) => {
           let educators = response.data;
@@ -35,18 +33,18 @@ const Login = ({ userName, setUserName, password, setPassword }) => {
         })
         .catch((error) => {
           console.log(error);
-        })
+        });
     };
     getAllEducators();
   }, []);
 
-  const findEducatorsId = () => {
+  function findEducatorsId() {
     educators.forEach(element => {
       educatorsIds.push(element.id)
     });
   };
 
-  const handleLogin = () => {
+  function handleLogin() {
     findEducatorsId();
     axios.get(logInUrl)
       .then((response) => {
@@ -69,7 +67,7 @@ const Login = ({ userName, setUserName, password, setPassword }) => {
         setUserName('');
         setPassword('');
       });
-  }
+  };
 
   return (
     <div className="page">
