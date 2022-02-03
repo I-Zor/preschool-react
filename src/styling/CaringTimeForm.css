@@ -25,18 +25,15 @@
 
 
 .time-picker-start {
-    flex-direction: column;
     text-align: center;
     margin-right: 20px;
-    margin-top: 10px;
 }
 
 .time-picker-end {
     text-align: center;
-    margin-top: 10px;
 }
 
-#buttons-modal {
+.buttons-modal {
     display: flex;
     justify-content: space-between;
     margin-top: 40px;
@@ -44,16 +41,12 @@
 
 .time-pickers {
     display: flex;
-    flex-direction: column;
-}
-
-.individual-day {
-    display: flex;
     flex-direction: row;
+    padding-top: 15px;
 }
 
 #margin-top{
-    margin-top: 120px;
+    margin-top: 80px;
 }
 
 .react-time-picker__wrapper{

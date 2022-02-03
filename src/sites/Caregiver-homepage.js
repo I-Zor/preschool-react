@@ -10,6 +10,7 @@ import AbsenceForm from '../components/AbsenceForm';
 const CaregiverHomepage = ({ dateToday, setUserName, setPassword }) => {
 
     let caregiverId = localStorage.getItem("userId");
+
     const [show, setShow] = useState(false);
     const [caregiversName, setCaregiversName] = useState('');
     const [children, setChildren] = useState([]);

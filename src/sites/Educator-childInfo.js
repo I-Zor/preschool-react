@@ -88,21 +88,29 @@ const EducatorChildInfo = ({ dateToday, setUserName, setPassword, setUser, user 
             {relative.contactInformation.email}
         </h3>);
 
-    const renderCaringTimeWeekday = caringTimes.map((weekday) =>
-        <h4
-            className="rendered-info-space"
-            key={weekday.id}
-            id={weekday.id}>
-            {weekday.weekday}
-        </h4>);
+    let monday = {};
+    let tuesday = {};
+    let wednesday = {};
+    let thursday = {};
+    let friday = {};
 
-    const renderCaringTimeHours = caringTimes.map((time) =>
-        <h4
-            className="rendered-info-minor"
-            key={time.id}
-            id={time.id}>
-            {time.startHour}:{time.startMinut} - {time.endHour}:{time.endMinut}
-        </h4>);
+    caringTimes.forEach((element) => {
+        if (element.weekday === "Måndag") {
+            monday = element;
+        };
+        if (element.weekday === "Tisdag") {
+            tuesday = element;
+        };
+        if (element.weekday === "Onsdag") {
+            wednesday = element;
+        };
+        if (element.weekday === "Torsdag") {
+            thursday = element;
+        };
+        if (element.weekday === "Fredag") {
+            friday = element;
+        };
+    });
 
     return (
         <div>
@@ -157,11 +165,29 @@ const EducatorChildInfo = ({ dateToday, setUserName, setPassword, setUser, user 
                     <div className="caregivers-container">
                         <h3 className="font">Omsörgstider</h3>
                         <div id="caring-times-info">
-                            <div>
-                                {renderCaringTimeWeekday}
+                            <div className="rendered-info-space">
+                                <h4 className="space">Måndag</h4>
+                                <h4 className="space">Tisdag</h4>
+                                <h4 className="space">Onsdag</h4>
+                                <h4 className="space">Torsdag</h4>
+                                <h4 className="space">Fredag</h4>
                             </div>
                             <div>
-                                {renderCaringTimeHours}
+                                <div className="rendered-info-minor">
+                                    {monday.startHour}:{monday.startMinut} - {monday.endHour}:{monday.endMinut}
+                                </div>
+                                <div className="rendered-info-minor">
+                                    {tuesday.startHour}:{tuesday.startMinut} - {tuesday.endHour}:{tuesday.endMinut}
+                                </div>
+                                <div className="rendered-info-minor">
+                                    {wednesday.startHour}:{wednesday.startMinut} - {wednesday.endHour}:{wednesday.endMinut}
+                                </div>
+                                <div className="rendered-info-minor">
+                                    {thursday.startHour}:{thursday.startMinut} - {thursday.endHour}:{thursday.endMinut}
+                                </div>
+                                <div className="rendered-info-minor">
+                                    {friday.startHour}:{friday.startMinut} - {friday.endHour}:{friday.endMinut}
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -8,7 +8,7 @@ import '../styling/Caregiver-childPage.css'
 
 const CaregiverChildPage = ({ dateToday, setUserName, setPassword, user, setUser }) => {
 
-    const [show, setShow] = useState(false);
+    const [isModalOpen, setModal] = useState(false);
     const [childName, setChildName] = useState('');
     const [groupName, setGroupName] = useState('');
     const [groupId, setGroupId] = useState('');
@@ -45,9 +45,10 @@ const CaregiverChildPage = ({ dateToday, setUserName, setPassword, user, setUser
                     console.log(error);
                 });
         };
+
         getChild();
         getEducatorsInGroup();
-    }, [groupId, childId, setUser]);
+    }, [groupId, childId, setUser, caringTimes]);
 
     const renderCaringTimeWeekday = caringTimes.map((weekday) =>
         <label
@@ -81,29 +82,9 @@ const CaregiverChildPage = ({ dateToday, setUserName, setPassword, user, setUser
             {educator.contactInformation.email}
         </label>);
 
-    function getCaringTimes() {
-        caringTimes.forEach(caringTime => {
-            if (caringTime.weekday === 'Måndag') {
-                localStorage.setItem("monday", JSON.stringify(caringTime));
-            };
-            if (caringTime.weekday === 'Tisdag') {
-                localStorage.setItem("tuesday", JSON.stringify(caringTime));
-            };
-            if (caringTime.weekday === 'Onsdag') {
-                localStorage.setItem("wednesday", JSON.stringify(caringTime));
-            };
-            if (caringTime.weekday === 'Torsdag') {
-                localStorage.setItem("thursday", JSON.stringify(caringTime));
-            };
-            if (caringTime.weekday === 'Fredag') {
-                localStorage.setItem("friday", JSON.stringify(caringTime));
-            };
-        });
-    };
 
     function getTimesAndShow() {
-        getCaringTimes();
-        setShow(true);
+        setModal(true);
     }
 
     return (
@@ -144,8 +125,8 @@ const CaregiverChildPage = ({ dateToday, setUserName, setPassword, user, setUser
                                 Ändra
                             </button>
                             <CaringTimeForm
-                                show={show}
-                                close={() => setShow(false)} />
+                                isModalOpen={isModalOpen}
+                                setModal={setModal} />
                         </div>
                     </div>
                 </div>

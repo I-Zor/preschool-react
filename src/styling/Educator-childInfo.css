@@ -41,21 +41,22 @@
 
 .rendered-info-space {
   display: flex;
-  width: 380px;
+  flex-direction: column;
+  width: 350px;
   font-size: 20px;
   font-family: Lato;
   color: #36130e;
-  border: 1px solid var(--primary);
-  padding: 5px
 }
 
 .rendered-info-minor {
   display: flex;
-  width: 100px;
+  width: 140px;
   font-size: 20px;
   font-family: Lato;
   color: #36130e;
-  border: 1px solid var(--primary);
   padding: 5px
 }
 
+.space {
+  padding: 5px
+}
