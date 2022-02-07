@@ -56,3 +56,9 @@
   border-radius: 10px;
   color: var(--primary);
 }
+
+#font-size {
+  font-size: 20px;
+  font-family: Lato;
+  color: #36130e;
+}

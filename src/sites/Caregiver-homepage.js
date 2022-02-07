@@ -83,7 +83,7 @@ const CaregiverHomepage = ({ dateToday, setUserName, setPassword }) => {
             </Header>
             <div className="container">
                 <div id="welcome-caregiver">
-                    <h1 className="font">Välkommen {caregiversName}</h1>
+                    <h1 className="font">Välkommen {caregiversName} !</h1>
                     <div id="child-group">
                         <div className="render-container">
                             {renderChildren}

@@ -50,21 +50,29 @@ const CaregiverChildPage = ({ dateToday, setUserName, setPassword, user, setUser
         getEducatorsInGroup();
     }, [groupId, childId, setUser, caringTimes]);
 
-    const renderCaringTimeWeekday = caringTimes.map((weekday) =>
-        <label
-            className="rendered-info"
-            key={weekday.id}
-            id={weekday.id}>
-            {weekday.weekday}
-        </label>);
+    let monday = {};
+    let tuesday = {};
+    let wednesday = {};
+    let thursday = {};
+    let friday = {};
 
-    const renderCaringTimeHours = caringTimes.map((time) =>
-        <label
-            className="rendered-info"
-            key={time.id}
-            id={time.id}>
-            {time.startHour}:{time.startMinut} - {time.endHour}:{time.endMinut}
-        </label>);
+    caringTimes.forEach((element) => {
+        if (element.weekday === "Måndag") {
+            monday = element;
+        };
+        if (element.weekday === "Tisdag") {
+            tuesday = element;
+        };
+        if (element.weekday === "Onsdag") {
+            wednesday = element;
+        };
+        if (element.weekday === "Torsdag") {
+            thursday = element;
+        };
+        if (element.weekday === "Fredag") {
+            friday = element;
+        };
+    });
 
     const renderEducatorsName = educators.map((educator) =>
         <label
@@ -113,10 +121,28 @@ const CaregiverChildPage = ({ dateToday, setUserName, setPassword, user, setUser
                     <label id="caring-time-title-caregiver">Omsörgstider</label>
                     <div id="caring-times-info-caregiver">
                         <div className="justify-content">
-                            {renderCaringTimeWeekday}
+                            <label id="font-size" className="space">Måndag</label>
+                            <label id="font-size" className="space">Tisdag</label>
+                            <label id="font-size" className="space">Onsdag</label>
+                            <label id="font-size" className="space">Torsdag</label>
+                            <label id="font-size" className="space">Fredag</label>
                         </div>
                         <div className="justify-content">
-                            {renderCaringTimeHours}
+                            <div className="rendered-info-minor">
+                                {monday.startHour}:{monday.startMinut} - {monday.endHour}:{monday.endMinut}
+                            </div>
+                            <div className="rendered-info-minor">
+                                {tuesday.startHour}:{tuesday.startMinut} - {tuesday.endHour}:{tuesday.endMinut}
+                            </div>
+                            <div className="rendered-info-minor">
+                                {wednesday.startHour}:{wednesday.startMinut} - {wednesday.endHour}:{wednesday.endMinut}
+                            </div>
+                            <div className="rendered-info-minor">
+                                {thursday.startHour}:{thursday.startMinut} - {thursday.endHour}:{thursday.endMinut}
+                            </div>
+                            <div className="rendered-info-minor">
+                                {friday.startHour}:{friday.startMinut} - {friday.endHour}:{friday.endMinut}
+                            </div>
                         </div>
                         <div className="justify-content">
                             <button
