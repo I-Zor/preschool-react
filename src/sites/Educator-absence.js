@@ -52,7 +52,7 @@ const EducatorAbsence = ({ dateToday, setUserName, setPassword, user, setUser })
                 <Sidebar
                 groupName={groupName}>
                 </Sidebar>
-                <div id="absent-children">
+                <div className="info-container">
                     <div id="absent-list">
                         <div className="render-container">
                             {renderChildren}

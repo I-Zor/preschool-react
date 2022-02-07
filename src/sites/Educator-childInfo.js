@@ -124,7 +124,7 @@ const EducatorChildInfo = ({ dateToday, setUserName, setPassword, setUser, user 
                 <Sidebar
                     groupName={groupName}>
                 </Sidebar>
-                <div id="child-info">
+                <div className="info-container">
                     <div>
                         <h2 className="font">{childFirstName} {childLastName}</h2>
                         <h3 className="font-dark">{childAddress}</h3>

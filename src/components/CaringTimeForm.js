@@ -37,10 +37,18 @@ const CaringTimeForm = ({ isModalOpen, setModal }) => {
     function setWeekDay(e) {
         if (e.target.checked) {
             setWeekday(e.target.value);
-        };
+        }
     };
 
     function changeCaringTime() {
+        
+        if (weekday === '') {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Vänligen ange veckodag'
+            });
+        };
+
         let putCaringTimeUrl = 'http://localhost:8080/caregiver/upsert-caring-time/' + childId;
         axios.put(putCaringTimeUrl, caringTimeResource)
             .then(() => {
@@ -50,7 +58,7 @@ const CaringTimeForm = ({ isModalOpen, setModal }) => {
                 });
             })
             .catch((error) => {
-                console.log(error);
+                    console.log(error);
             });
     };
 

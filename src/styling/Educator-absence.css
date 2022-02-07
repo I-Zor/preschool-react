@@ -1,10 +1,3 @@
-#absent-children {
-  display: flex;
-  flex-direction: column;
-  margin: 0 auto;
-  margin-top: 80px;
-}
-
 .reason {
   font-size: 20px;
   margin-left: 50px;
@@ -12,7 +5,6 @@
   margin-bottom: 25px;
   font-family: Lato;
   color: var(--primary);
-
 }
 
 #render-container {
@@ -28,6 +20,6 @@
 }
 
 #absent-list {
-display: flex;
-margin-top: 15px;
+  display: flex;
+  margin-top: 15px;
 }

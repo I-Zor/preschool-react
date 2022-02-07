@@ -4,13 +4,6 @@
   margin-bottom: 20px;
 }
 
-#child-info {
-  display: flex;
-  flex-direction: column;
-  margin: 0 auto;
-  margin-top: 80px;
-}
-
 .rendered-address {
   display: flex;
   width: 400px;
@@ -45,7 +38,6 @@
   font-family: Lato;
   color: #36130e;
 }
-
 
 .space {
   padding: 5px
