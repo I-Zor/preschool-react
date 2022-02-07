@@ -74,13 +74,13 @@ const Login = ({ userName, setUserName, password, setPassword }) => {
       <h1 id="welcome">Välkommen till Förskolan Hogwarts</h1>
       <form action="" id="login-form">
         <label id="username">Användarnamn
-          <input className="input" value={userName} onChange={updateUserName} type="text" />
+          <input className="input" value={userName} onChange={updateUserName} type="text" name="userName"  autoComplete="on"/>
         </label>
         <label id="password">Lösenord
-          <input className="input" value={password} onChange={updatePassword} type="text" />
+          <input className="input" value={password} onChange={updatePassword} type="password" />
         </label>
       </form>
-      <button onClick={handleLogin} id="logIn-button">Logga in</button>
+      <button onClick={handleLogin} id="logIn-button" type="submit">Logga in</button>
     </div>
   );
 }
