@@ -89,19 +89,44 @@ const CaringTimeForm = ({ isModalOpen, setModal }) => {
                     <div id="margin-top" className="caring-time-picker">
                         <div id="days-checkboxes">
                             <label>
-                                <input type="radio" onChange={setWeekDay} value="Måndag" name="days" /> Måndag
+                                <input
+                                    type="radio"
+                                    onChange={setWeekDay}
+                                    value="Måndag"
+                                    name="days" />
+                                Måndag
                             </label>
                             <label>
-                                <input type="radio" onChange={setWeekDay} value="Tisdag" name="days" /> Tisdag
+                                <input
+                                    type="radio"
+                                    onChange={setWeekDay}
+                                    value="Tisdag"
+                                    name="days" />
+                                Tisdag
                             </label>
                             <label>
-                                <input type="radio" onChange={setWeekDay} value="Onsdag" name="days" /> Onsdag
+                                <input
+                                    type="radio"
+                                    onChange={setWeekDay}
+                                    value="Onsdag"
+                                    name="days" />
+                                Onsdag
                             </label>
                             <label>
-                                <input type="radio" onChange={setWeekDay} value="Torsdag" name="days" /> Torsdag
+                                <input
+                                    type="radio"
+                                    onChange={setWeekDay}
+                                    value="Torsdag"
+                                    name="days" />
+                                Torsdag
                             </label>
                             <label>
-                                <input type="radio" onChange={setWeekDay} value="Fredag" name="days" /> Fredag
+                                <input
+                                    type="radio"
+                                    onChange={setWeekDay}
+                                    value="Fredag"
+                                    name="days" />
+                                Fredag
                             </label>
                         </div>
                         <div className="time-pickers">
@@ -122,8 +147,16 @@ const CaringTimeForm = ({ isModalOpen, setModal }) => {
                         </div>
                     </div>
                     <div className="buttons-modal">
-                        <button onClick={closeModal} className="save-button">Stäng</button>
-                        <button onClick={changeCaringTime} className="save-button">Spara</button>
+                        <button
+                            onClick={closeModal}
+                            className="save-button">
+                            Stäng
+                        </button>
+                        <button
+                            onClick={changeCaringTime}
+                            className="save-button">
+                            Spara
+                        </button>
                     </div>
                 </div>
             </Modal>

@@ -11,14 +11,10 @@ registerLocale('sv', sv)
 
 Modal.setAppElement('#root');
 
-const AbsenceForm = (props) => {
+const AbsenceForm = ({isModalOpen, setModal}) => {
 
     const [startDate, setStartDate] = useState(new Date());
     const [reason, setReason] = useState('');
-
-    if (!props.show) {
-        return null
-    };
 
     let chosenDate = startDate;
     let convertedDate = chosenDate.toISOString().slice(0, 10);
@@ -46,7 +42,7 @@ const AbsenceForm = (props) => {
             swal.fire({
                 icon: 'warning',
                 title: 'Vänligen ange anledning till frånvaro',
-              });
+            });
         };
 
         let saveAbsenceUrl = 'http://localhost:8080/educator/absence/' + childId + '/' + convertedDate + '/' + reason;
@@ -55,7 +51,7 @@ const AbsenceForm = (props) => {
                 swal.fire({
                     icon: 'success',
                     title: 'Frånvaro är sparad',
-                  });
+                });
             })
             .catch((error) => {
                 console.log(error);
@@ -66,6 +62,9 @@ const AbsenceForm = (props) => {
         saveAbsence();
     };
 
+    function closeModal() {
+        setModal(false);
+    }
     const customStyles = {
         content: {
             top: '50%',
@@ -79,35 +78,60 @@ const AbsenceForm = (props) => {
     return (
         <div>
             <Modal
-                isOpen={props.show}
+                isOpen={isModalOpen}
+                onRequestClose={closeModal}
                 style={customStyles} >
                 <div id="absence-form">
                     <div>
                         <div id="date-today-form">
                             <label className="font-size">
-                                <input type="checkbox" id="checkbox-today" onChange={setDateToToday} />
+                                <input
+                                    type="checkbox"
+                                    id="checkbox-today"
+                                    onChange={setDateToToday} />
                                 Idag
                             </label>
-                            <label className="font-size">Eller välj annan dag (tryck på datumet nedanför)</label>
+                            <label
+                                className="font-size">
+                                Eller välj annan dag (tryck på datumet nedanför)
+                            </label>
                         </div>
                         <div id="date-picker">
-                            <DatePicker locale="sv" selected={startDate} onChange={(date) => setStartDate(date)} />
+                            <DatePicker
+                                locale="sv"
+                                selected={startDate}
+                                onChange={(date) => setStartDate(date)}
+                                className="myDatePicker" />
                         </div>
                         <div id="reason-form">
                             <form>
                                 <label className="font-size"> Anledning:
-                                    <input type="text" id="reason" onChange={getReason} />
+                                    <input
+                                        type="text"
+                                        id="reason"
+                                        onChange={getReason} />
                                 </label>
                             </form>
                         </div>
                         <label className="font-size">
-                            <input type="checkbox" id="checkbox-offtime" onChange={setReasonAsDayOff} />
+                            <input
+                                type="checkbox"
+                                id="checkbox-offtime"
+                                onChange={setReasonAsDayOff} />
                             Ledig
                         </label>
                     </div>
                     <div className="buttons-modal">
-                        <button className="save-button" onClick={props.close}> Stäng</button>
-                        <button onClick={handleSavingAbsence} className="save-button">Spara</button>
+                        <button
+                            className="save-button"
+                            onClick={closeModal}>
+                            Stäng
+                        </button>
+                        <button
+                            onClick={handleSavingAbsence}
+                            className="save-button">
+                            Spara
+                        </button>
                     </div>
                 </div>
             </Modal>

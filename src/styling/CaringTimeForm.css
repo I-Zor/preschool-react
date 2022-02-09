@@ -2,7 +2,7 @@
     background: var(--dark);
     padding: 40px;
     width: 600px;
-    height: 500px;
+    height: 420px;
 }
 
 .caring-time-picker {
@@ -42,11 +42,11 @@
 .time-pickers {
     display: flex;
     flex-direction: row;
-    padding-top: 15px;
+    padding-top: 50px;
 }
 
 #margin-top{
-    margin-top: 80px;
+    margin-top: 40px;
 }
 
 .react-time-picker__wrapper{

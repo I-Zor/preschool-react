@@ -9,7 +9,7 @@ import '../styling/Educator-children.css';
 
 const EducatorChildren = ({ dateToday, setUserName, setPassword, user, setUser }) => {
 
-    const [show, setShow] = useState(false);
+    const [isModalOpen, setModal] = useState(false);
 
     const navigateToChildPage = useNavigate();
 
@@ -39,7 +39,7 @@ const EducatorChildren = ({ dateToday, setUserName, setPassword, user, setUser }
     }, [setUser]);
 
     function registerAbsence(e) {
-        setShow(true);
+        setModal(true);
         localStorage.setItem("childId", e.target.id);
     };
 
@@ -68,7 +68,9 @@ const EducatorChildren = ({ dateToday, setUserName, setPassword, user, setUser }
                         {renderRegisterAbsenceButtons}
                     </div>
                 </div>
-                <AbsenceForm show={show} close={() => setShow(false)} />
+                <AbsenceForm
+                    isModalOpen={isModalOpen}
+                    setModal={setModal} />
             </div>
             <Footer></Footer>
         </div>

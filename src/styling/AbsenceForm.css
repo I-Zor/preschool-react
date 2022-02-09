@@ -1,6 +1,7 @@
 #absence-form {
     border-color: var(--dark);
     padding: 30px;
+    padding-bottom: 0;
     width: 600px;
     height: 400px;
     background: var(--dark);
@@ -20,6 +21,13 @@
   #date-picker {
     margin-top: 15px;
     margin-bottom: 30px;
+    margin-left: 114px;
+  }
+
+  .myDatePicker {
+    height: 30px;
+    text-align: center;
+    margin-top: 10px;
   }
 
   #reason {

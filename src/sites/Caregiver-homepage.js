@@ -11,7 +11,7 @@ const CaregiverHomepage = ({ dateToday, setUserName, setPassword }) => {
 
     let caregiverId = localStorage.getItem("userId");
 
-    const [show, setShow] = useState(false);
+    const [isModalOpen, setModal] = useState(false);
     const [caregiversName, setCaregiversName] = useState('');
     const [children, setChildren] = useState([]);
 
@@ -70,7 +70,7 @@ const CaregiverHomepage = ({ dateToday, setUserName, setPassword }) => {
     };
 
     function registerAbsence(e) {
-        setShow(true);
+        setModal(true);
         localStorage.setItem("childId", e.target.id);
     };
 
@@ -91,7 +91,9 @@ const CaregiverHomepage = ({ dateToday, setUserName, setPassword }) => {
                         <div id="render-container">
                             {renderRegisterAbsenceButtons}
                         </div>
-                        <AbsenceForm show={show} close={() => setShow(false)} />
+                        <AbsenceForm
+                            isModalOpen={isModalOpen}
+                            setModal={setModal} />
                     </div>
                 </div>
             </div>

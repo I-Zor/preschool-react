@@ -121,11 +121,31 @@ const CaregiverChildPage = ({ dateToday, setUserName, setPassword, user, setUser
                     <label id="caring-time-title-caregiver">Omsörgstider</label>
                     <div id="caring-times-info-caregiver">
                         <div className="justify-content">
-                            <label id="font-size" className="space">Måndag</label>
-                            <label id="font-size" className="space">Tisdag</label>
-                            <label id="font-size" className="space">Onsdag</label>
-                            <label id="font-size" className="space">Torsdag</label>
-                            <label id="font-size" className="space">Fredag</label>
+                            <label
+                                id="font-size"
+                                className="space">
+                                Måndag
+                            </label>
+                            <label
+                                id="font-size"
+                                className="space">
+                                Tisdag
+                            </label>
+                            <label
+                                id="font-size"
+                                className="space">
+                                Onsdag
+                            </label>
+                            <label
+                                id="font-size"
+                                className="space">
+                                Torsdag
+                            </label>
+                            <label
+                                id="font-size"
+                                className="space">
+                                Fredag
+                            </label>
                         </div>
                         <div className="justify-content">
                             <div className="rendered-info-minor">
