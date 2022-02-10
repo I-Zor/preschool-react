@@ -25,6 +25,8 @@ const Login = ({ userName, setUserName, password, setPassword }) => {
   }
 
   useEffect(() => {
+    // Backend gives only user id because user can be either Caregiver or Educator. 
+    // So here is checked to which one id belongs and Educators are listed because they are fewer than Caregivers. 
     function getAllEducators() {
       axios.get(educatorsUrl)
         .then((response) => {

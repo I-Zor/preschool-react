@@ -43,14 +43,14 @@ const EducatorChildInfo = ({ dateToday, setUserName, setPassword, setUser, user 
             });
     }, [childId, setUser]);
 
-    const renderCaregiversName = caregivers.map((caregiver) =>
+    const renderCaregiversNames = caregivers.map((caregiver) =>
         <h4
             className="rendered-name"
             key={caregiver.id}>
             {caregiver.personalInformation.firstName} {caregiver.personalInformation.lastName}
         </h4>);
 
-    const renderCaregiversAddress = caregivers.map((caregiver) =>
+    const renderCaregiversAddresses = caregivers.map((caregiver) =>
         <h4
             className="rendered-address"
             key={caregiver.id}>
@@ -139,10 +139,10 @@ const EducatorChildInfo = ({ dateToday, setUserName, setPassword, setUser, user 
                             <h3 className="font">Vårdnadshavare:</h3>
                             <div className="caregivers">
                                 <div className="caregivers-info" >
-                                    {renderCaregiversName}
+                                    {renderCaregiversNames}
                                 </div>
                                 <div className="caregivers-info">
-                                    {renderCaregiversAddress}
+                                    {renderCaregiversAddresses}
                                 </div>
                                 <div className="caregivers-info">
                                     {renderCaregiversInfo}

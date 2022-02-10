@@ -28,7 +28,7 @@ const EducatorAbsence = ({ dateToday, setUserName, setPassword, user, setUser })
         </button>);
 
 
-    const renderReason = absences.map((absence) =>
+    const renderReasons = absences.map((absence) =>
         <label
             className="reason"
             key={absence.id}>
@@ -58,7 +58,7 @@ const EducatorAbsence = ({ dateToday, setUserName, setPassword, user, setUser })
                             {renderChildren}
                         </div>
                         <div id="render-reason">
-                            {renderReason}
+                            {renderReasons}
                         </div>
                     </div>
                 </div>

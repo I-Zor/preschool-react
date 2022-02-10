@@ -50,6 +50,9 @@ const CaregiverChildPage = ({ dateToday, setUserName, setPassword, user, setUser
         getEducatorsInGroup();
     }, [groupId, childId, setUser, caringTimes]);
 
+    // In PostgreSQL database CaringTime is changing place when updated so
+    // caring times for one child don't have to be in correct order from monday to friday.
+    // That's the reason why they are set up manually
     let monday = {};
     let tuesday = {};
     let wednesday = {};
