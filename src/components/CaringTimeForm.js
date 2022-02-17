@@ -19,8 +19,7 @@ const CaringTimeForm = ({ isModalOpen, setModal }) => {
     let startHour = splittedStartTime[0];
     let startMinute = splittedStartTime[1];
 
-    let chosenEndTime = endValue;
-    let splittedEndTime = chosenEndTime.split(':');
+    let splittedEndTime = endValue.split(':');
     let endHour = splittedEndTime[0];
     let endMinute = splittedEndTime[1];
 

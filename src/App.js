@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import Login from './sites/LogIn';
-import EducatorHomepage from './sites/Educator-homepage';
-import EducatorChildren from './sites/Educator-children';
-import EducatorAbsence from './sites/Educator-absence';
-import EducatorChildInfo from './sites/Educator-childInfo';
-import CaregiverHomepage from './sites/Caregiver-homepage';
-import CaregiverChildPage from './sites/Caregiver-childPage';
+import Login from './sites/logIn';
+import EducatorHomepage from './sites/educator-homepage';
+import EducatorChildren from './sites/educator-children';
+import EducatorAbsence from './sites/educator-absence';
+import EducatorChildInfo from './sites/educator-childInfo';
+import CaregiverHomepage from './sites/caregiver-homepage';
+import CaregiverChildPage from './sites/caregiver-childPage';
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 
 
